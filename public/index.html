@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Web WorldWind Starter Template">
+    <meta name="author" content="Bruce Schubert">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/images/nasa.gov.ico">
+
+    <title>WorldWind Template</title>
+
+    <!-- Bootstrap 4.0 CSS compiled and minified -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Font Awesome icons (see: https://fontawesome.com/icons?d=gallery) -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+          integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+
+    <!-- Custom styles and overrides -->
+    <link href="%PUBLIC_URL%/css/custom.css" rel="stylesheet">
+
+</head>
+<body>
+
+<!--Main Menu-->
+<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+    <!--Branding icon and text-->
+    <a class="navbar-brand" href="https://worldwind.arc.nasa.gov/web">
+        <img src="%PUBLIC_URL%/images/nasa-logo.svg" width="40" height="40" class="d-inline-block align-top" alt="">
+        WorldWind
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"
+            aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!--Main menu content-->
+    <div class="collapse navbar-collapse" id="main-menu">
+        <ul class="navbar-nav mr-auto">
+            <!--Layers-->
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#layers" role="button">
+                    <span class="fas fa-list" aria-hidden="true"></span>
+                    <span class="d-md-none d-lg-inline" aria-hidden="true">Layers</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#markers" role="button">
+                    <span class="fas fa-map-marker-alt" aria-hidden="true"></span>
+                    <span class="d-md-none d-lg-inline" aria-hidden="true">Markers</span>
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <span class="fas fa-pencil-alt" aria-hidden="true"></span>
+                    <span class="d-md-none d-lg-inline" aria-hidden="true">Draw</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="#" role="button">Shape</a>
+                    <a class="dropdown-item" href="#">Another shape</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#" role="button">
+                    <span class="fas fa-cog" aria-hidden="true"></span>
+                    <span class="d-md-none d-lg-inline" aria-hidden="true">Settings</span>
+                </a>
+            </li>
+        </ul>
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success disabled" type="submit">
+                <span class="fas fa-search" aria-hidden="true"></span>
+            </button>
+        </form>
+    </div>
+</nav>
+
+<!-- Main content -->
+<!-- Use container-fluid for 100% width and set padding to 0 -->
+<main role="main" class="container-fluid p-0">
+
+    <!-- WorldWindow -->
+    <div id="globe" class="worldwindow p-0">
+        <!--.d-block ensures the size is correct (prevents a scrollbar from appearing)-->
+        <canvas id="globe-canvas" class="d-block"
+                style="width: 100%; height: 100%;
+                        background-color: rgb(36,74,101);">
+            Try Chrome or FireFox.
+        </canvas>
+    </div>
+
+    <!--WorldWindow overlays-->
+    <div id="cards-overlay" class="container worldwindow-overlay">
+        <!--Layers-->
+        <div id="layers" class="collapse"></div>
+        <!--Markers-->
+        <div id="markers" class="collapse"></div>
+    </div>
+
+</main><!-- /.container-fluid -->
+
+<!-- JavaScript placed at the end of the document so the page loads faster -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script src="https://files.worldwind.arc.nasa.gov/artifactory/web/0.9.0/worldwind.min.js"></script>
+<script src="js/app.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        "use strict";
+        // Auto-collapse the mobile main menu when its button items are clicked
+        $('.navbar-collapse a[role="button"]').click(function () {
+            $('.navbar-collapse').collapse('hide');
+        });
+
+        // Collapse card ancestors when the close icon is clicked
+        $('.collapse .close').on('click', function () {
+            $(this).closest('.collapse').collapse('hide');
+        });
+    });
+</script>
+</body>
+</html>
