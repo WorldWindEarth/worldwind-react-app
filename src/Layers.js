@@ -19,6 +19,6 @@ class Layers extends Component {
             </div>
         );
     }
-}
+};
 
 export default Layers;
