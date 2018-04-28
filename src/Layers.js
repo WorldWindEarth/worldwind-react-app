@@ -1,8 +1,21 @@
 import React, {Component} from 'react';
+
+import LayerButton from './LayerButton';
 import './Layers.css';
 
 class Layers extends Component {
+        constructor(props) {
+        super(props);
+        this.layers = props.wwd.layers;
+    }
+    
     render() {
+        // Create a list of items for React to render; each item must have a unique key
+        let nextKey = 0;
+        let layerButtons = this.layers.map((layer) => 
+            <LayerButton key={nextKey++} layer={layer} />
+        );
+    
         return (
             <div className="card globe-card">
                 <div className="card-header">
@@ -10,11 +23,11 @@ class Layers extends Component {
                         <span className="fas fa-list" aria-hidden="true"></span> Layers
                         <button type="button" className="close pull-right" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
-                        </button></h5>
+                        </button>
+                    </h5>
                 </div>
                 <div className="card-body">
-                    <p className="card-text">Layer list goes here.</p>
-                    <p className="card-text">Add servers/data goes here.</p>
+                    <div className="list-group">{layerButtons}</div>
                 </div>
             </div>
         );

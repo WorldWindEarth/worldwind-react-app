@@ -2,46 +2,52 @@ import React, {Component} from 'react'
 import './Globe.css';
 import WorldWind from '@nasaworldwind/worldwind';
 
-class Globe extends Component{
+class Globe extends Component {
 
-    shouldComponentUpdate(){
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+
+    shouldComponentUpdate() {
         // WorldWind is not a regular React UI component. It should
         // be loaded once and never be updated again
         return false;
     }
 
-    componentDidMount(){
+    componentDidMount() {
         // Code to execute when the component is called and mounted.
         // Usual WorldWind boilerplate (creating WorldWindow, 
         // adding layers, etc.) applies here.
-        
-        // Create a World Window for the canvas. Note passing the
-        // Canvas id through a React ref.
-        this.wwd = new WorldWind.WorldWindow(this.refs.globeCanvas.id);
-        
-        // Add layers to the WorldWindow
-        this.wwd.addLayer(new WorldWind.BMNGOneImageLayer());
-        this.wwd.addLayer(new WorldWind.BingAerialWithLabelsLayer());
-        
-        // Add a compass, a coordinates display and some view controls to the World Window.
-        this.wwd.addLayer(new WorldWind.CompassLayer());
-        this.wwd.addLayer(new WorldWind.CoordinatesDisplayLayer(this.wwd));
-        this.wwd.addLayer(new WorldWind.ViewControlsLayer(this.wwd));
+        if (!this.state.wwd) {
 
+            // Create a World Window for the canvas. Note passing the
+            // Canvas id through a React ref.
+            let wwd = new WorldWind.WorldWindow(this.refs.globeCanvas.id);
+            this.setState({wwd: wwd});
+
+            // Add layers to the WorldWindow
+            wwd.addLayer(new WorldWind.BMNGOneImageLayer());
+            wwd.addLayer(new WorldWind.BingAerialWithLabelsLayer());
+
+            // Add a compass, a coordinates display and some view controls to the World Window.
+            wwd.addLayer(new WorldWind.CompassLayer());
+            wwd.addLayer(new WorldWind.CoordinatesDisplayLayer(wwd));
+            wwd.addLayer(new WorldWind.ViewControlsLayer(wwd));
+
+            if (this.props.onMapCreated && typeof this.props.onMapCreated === "function") {
+                this.props.onMapCreated(wwd);
+            }
+        }
     }
 
     render() {
-//        const style = {
-//            width: "100%",
-//            height: "100%"
-//        }
-        
-        // JSX code to create canvas with WorldWindow
+        // JSX code to create canvas for the WorldWindow using a ref attribute
         return(
-            <canvas id="globe-canvas" ref="globeCanvas" className="globe-canvas d-block">
+            <canvas id="globe-canvas" ref="globeCanvas" className="globe-canvas">
                 Your browser does not support HTML5 Canvas.
             </canvas>
-        );
+            );
     }
 };
 

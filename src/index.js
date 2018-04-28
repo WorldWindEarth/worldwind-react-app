@@ -5,13 +5,13 @@ import Layers from './Layers';
 import Markers from './Markers';
 import './index.css';
 
-ReactDOM.render(
-  <Globe />,
+const globe = ReactDOM.render(
+  <Globe ref={(globeComponent) => {window.globeComponent = globeComponent;}}/>,
   document.getElementById('globe')
 );
 
 ReactDOM.render(
-  <Layers />,
+  <Layers wwd={globe.state.wwd} />,
   document.getElementById('layers')
 );
 

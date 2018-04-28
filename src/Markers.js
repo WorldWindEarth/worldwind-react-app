@@ -7,7 +7,7 @@ class Markers extends Component {
             <div className="card globe-card">
                 <div className="card-header">
                     <h5 className="card-title">
-                        <span class="fas fa-map-marker-alt" aria-hidden="true"></span> Markers
+                        <span className="fas fa-map-marker-alt" aria-hidden="true"></span> Markers
                         <button type="button" className="close pull-right" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button></h5>
