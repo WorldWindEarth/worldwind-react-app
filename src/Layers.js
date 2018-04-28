@@ -17,7 +17,7 @@ class Layers extends Component {
         );
     
         return (
-            <div className="card globe-card">
+            <div className="card globe-card w-100">
                 <div className="card-header">
                     <h5 className="card-title">
                         <span className="fas fa-list" aria-hidden="true"></span> Layers
