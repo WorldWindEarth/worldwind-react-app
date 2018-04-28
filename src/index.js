@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Globe from './Globe';
 import Layers from './Layers';
 import Markers from './Markers';
+import Settings from './Settings';
 import './index.css';
 
 const globe = ReactDOM.render(
@@ -18,4 +19,9 @@ ReactDOM.render(
 ReactDOM.render(
     <Markers />,
     document.getElementById('markers')
+);
+
+ReactDOM.render(
+    <Settings />,
+    document.getElementById('settings')
 );

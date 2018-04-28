@@ -44,7 +44,7 @@ class Globe extends Component {
     render() {
         // JSX code to create canvas for the WorldWindow using a ref attribute
         return(
-            <canvas id="globe-canvas" ref="globeCanvas" className="globe-canvas">
+            <canvas id="globe-canvas" ref="globeCanvas" className="globe-canvas d-block">
                 Your browser does not support HTML5 Canvas.
             </canvas>
             );
