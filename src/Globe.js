@@ -1,12 +1,37 @@
-import React, {Component} from 'react'
-import './Globe.css';
+import React, {Component} from 'react';
 import WorldWind from '@nasaworldwind/worldwind';
 
-class Globe extends Component {
+import './Globe.css';
+
+export default class Globe extends Component {
 
     constructor(props) {
         super(props);
         this.state = {};
+    }
+
+    get baseLayers() {
+        return this.state.wwd.layers.filter(layer => layer.category === 'base');
+    }
+    
+    get overlayLayers() {
+        return this.state.wwd.layers.filter(layer => layer.category === 'overlay');
+    }
+    
+    get settingLayers() {
+        return this.state.wwd.layers.filter(layer => layer.category === 'setting');
+    }
+
+    toggleLayerEnabled(layer) {
+        // Handle base layer mutual exclusivity rule - only one can be enabled at a time
+        if (layer.category === 'base') {
+            this.state.wwd.layers.forEach(function (item) {
+                if (item.category === 'base' && item !== layer) {
+                    item.enabled = false;
+                }
+            })
+        }
+        layer.enabled = !layer.enabled;
     }
 
     shouldComponentUpdate() {
@@ -26,14 +51,57 @@ class Globe extends Component {
             let wwd = new WorldWind.WorldWindow(this.refs.globeCanvas.id);
             this.setState({wwd: wwd});
 
-            // Add layers to the WorldWindow
-            wwd.addLayer(new WorldWind.BMNGOneImageLayer());
-            wwd.addLayer(new WorldWind.BingAerialWithLabelsLayer());
+            // Define the layers to be added to the globe.
+            let layerConfig = [{
+                    layer: new WorldWind.BMNGOneImageLayer(),
+                    category: "background",
+                    enabled: true
+                }, {
+                    layer: new WorldWind.BMNGLayer(),
+                    category: "base",
+                    enabled: true
+                }, {
+                    layer: new WorldWind.BMNGLandsatLayer(),
+                    category: "base",
+                    enabled: true
+                }, {
+                    layer: new WorldWind.BingAerialLayer(),
+                    category: "base",
+                    enabled: false
+                }, {
+                    layer: new WorldWind.BingAerialWithLabelsLayer(),
+                    category: "base",
+                    enabled: true
+                }, {
+                    layer: new WorldWind.BingRoadsLayer(),
+                    category: "overlay",
+                    enabled: false
+                }, {
+                    layer: new WorldWind.CompassLayer(),
+                    category: "setting",
+                    enabled: true
+                }, {
+                    layer: new WorldWind.CoordinatesDisplayLayer(wwd),
+                    category: "setting",
+                    enabled: true
+                }, {
+                    layer: new WorldWind.ViewControlsLayer(wwd),
+                    category: "setting",
+                    enabled: true,
+                }];
 
-            // Add a compass, a coordinates display and some view controls to the World Window.
-            wwd.addLayer(new WorldWind.CompassLayer());
-            wwd.addLayer(new WorldWind.CoordinatesDisplayLayer(wwd));
-            wwd.addLayer(new WorldWind.ViewControlsLayer(wwd));
+            // Apply the layer options and add the layers to the globe
+            for (let i = 0; i < layerConfig.length; i++) {
+                let layer = layerConfig[i].layer;
+                // Set common layer properties
+                layer.enabled = layerConfig[i].enabled;
+                layer.opacity = layerConfig[i].opacity ? layerConfig[i].opacity : 1.0;
+                // Add new category property to the layer for layer management 
+                layer.category = layerConfig[i].category;
+
+                // Add the layer to the globe
+                wwd.addLayer(layer);
+            }
 
             if (this.props.onMapCreated && typeof this.props.onMapCreated === "function") {
                 this.props.onMapCreated(wwd);
@@ -51,4 +119,3 @@ class Globe extends Component {
     }
 };
 
-export default Globe;

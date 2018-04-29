@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import Globe from './Globe';
-import Layers from './Layers';
-import Markers from './Markers';
-import Settings from './Settings';
+import Layers from './layers/Layers';
+import Markers from './markers/Markers';
+import Settings from './settings/Settings';
 import './index.css';
 
 const globe = ReactDOM.render(
@@ -12,7 +13,7 @@ const globe = ReactDOM.render(
 );
 
 ReactDOM.render(
-  <Layers wwd={globe.state.wwd} />,
+  <Layers globe={globe} />,
   document.getElementById('layers')
 );
 
@@ -22,6 +23,6 @@ ReactDOM.render(
 );
 
 ReactDOM.render(
-    <Settings />,
+    <Settings globe={globe} />,
     document.getElementById('settings')
 );

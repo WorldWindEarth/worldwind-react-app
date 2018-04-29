@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
+import Globe from '../Globe';
 import './Layers.css';
 
 /**
@@ -17,17 +18,17 @@ export default class LayerButton extends Component {
     
     static propTypes = {
         layer: PropTypes.object.isRequired,
+        globe: PropTypes.instanceOf(Globe).isRequired
     }   
 
     toggleLayer(e) {
-        // Toggle WorldWind layer property
-        this.props.layer.enabled = !this.props.layer.enabled;
-        // Update component
-        this.setState({enabled: this.props.layer.enabled});
+        const layer = this.props.layer;
+        this.props.globe.toggleLayerEnabled(layer);
+        this.setState({enabled: layer.enabled});
     }
 
     render() {
-        const buttonClass = "list-group-item list-group-item-action btn btn-block"
+        const buttonClass = "list-group-item list-group-item-action"
             + (this.state.enabled ? " active" : "");
 
         return (

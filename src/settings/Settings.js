@@ -1,6 +1,15 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+
+import Globe from '../Globe';
+import SettingLayers from './SettingLayers';
 
 export default class Settings extends Component {
+        
+    static propTypes = {
+        globe: PropTypes.instanceOf(Globe).isRequired
+    } 
+    
     render() {
         return (
             <div className="card globe-card">
@@ -13,7 +22,7 @@ export default class Settings extends Component {
                         </h5>
                 </div>
                 <div className="card-body">
-                    <p className="card-text">Individual settings go here.</p>
+                    <SettingLayers globe={this.props.globe} />
                 </div>
             </div>
         );

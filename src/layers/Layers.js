@@ -1,21 +1,19 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
-import LayerButton from './LayerButton';
+import Globe from '../Globe'
+import BaseLayers from './BaseLayers';
+import OverlayLayers from './OverlayLayers';
 import './Layers.css';
 
-class Layers extends Component {
-        constructor(props) {
-        super(props);
-        this.layers = props.wwd.layers;
-    }
+export default class Layers extends Component {
     
+    static propTypes = {
+        globe: PropTypes.instanceOf(Globe).isRequired,
+    }   
+
     render() {
-        // Create a list of items for React to render; each item must have a unique key
-        let nextKey = 0;
-        let layerButtons = this.layers.map((layer) => 
-            <LayerButton key={nextKey++} layer={layer} />
-        );
-    
+        // Create a Bootstrap card that renders the layer lists
         return (
             <div className="card globe-card w-100">
                 <div className="card-header">
@@ -27,11 +25,11 @@ class Layers extends Component {
                     </h5>
                 </div>
                 <div className="card-body">
-                    <div className="list-group">{layerButtons}</div>
+                    <BaseLayers layers={this.props.globe.overlayLayers} globe={this.props.globe}/>
+                    <hr/>
+                    <BaseLayers layers={this.props.globe.baseLayers} globe={this.props.globe}/>
                 </div>
             </div>
         );
     }
 };
-
-export default Layers;
