@@ -7,29 +7,46 @@ export default class Globe extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            baseLayers: [],
+            overlayLayers: [],
+            settingLayers: []
+        };
+        this.wwd = null;
     }
 
     get baseLayers() {
-        return this.state.wwd.layers.filter(layer => layer.category === 'base');
-    }
-    
-    get overlayLayers() {
-        return this.state.wwd.layers.filter(layer => layer.category === 'overlay');
-    }
-    
-    get settingLayers() {
-        return this.state.wwd.layers.filter(layer => layer.category === 'setting');
+        return this.wwd.layers.filter(layer => layer.category === 'base');
     }
 
+    get overlayLayers() {
+        return this.wwd.layers.filter(layer => layer.category === 'overlay');
+    }
+
+    get settingLayers() {
+        return this.wwd.layers.filter(layer => layer.category === 'setting');
+    }
+
+    addLayer(config) {
+        let layer = config.layer;
+        // Set common layer properties
+        layer.enabled = config.enabled;
+        layer.opacity = config.opacity ? config.opacity : 1.0;
+        // Add new category property to the layer for layer management 
+        layer.category = config.category;
+        // Add the layer to the globe
+        this.wwd.addLayer(layer);
+    
+    }
     toggleLayerEnabled(layer) {
         // Handle base layer mutual exclusivity rule - only one can be enabled at a time
         if (layer.category === 'base') {
-            this.state.wwd.layers.forEach(function (item) {
+            this.wwd.layers.forEach(function (item) {
                 if (item.category === 'base' && item !== layer) {
                     item.enabled = false;
                 }
             })
+            this.setState({baseLayers: this.baseLayers});
         }
         layer.enabled = !layer.enabled;
     }
@@ -44,68 +61,59 @@ export default class Globe extends Component {
         // Code to execute when the component is called and mounted.
         // Usual WorldWind boilerplate (creating WorldWindow, 
         // adding layers, etc.) applies here.
-        if (!this.state.wwd) {
 
-            // Create a World Window for the canvas. Note passing the
-            // Canvas id through a React ref.
-            let wwd = new WorldWind.WorldWindow(this.refs.globeCanvas.id);
-            this.setState({wwd: wwd});
+        // Create a World Window for the canvas. Note passing the
+        // Canvas id through a React ref.
+        this.wwd = new WorldWind.WorldWindow(this.refs.globeCanvas.id);
 
-            // Define the layers to be added to the globe.
-            let layerConfig = [{
-                    layer: new WorldWind.BMNGOneImageLayer(),
-                    category: "background",
-                    enabled: true
-                }, {
-                    layer: new WorldWind.BMNGLayer(),
-                    category: "base",
-                    enabled: true
-                }, {
-                    layer: new WorldWind.BMNGLandsatLayer(),
-                    category: "base",
-                    enabled: true
-                }, {
-                    layer: new WorldWind.BingAerialLayer(),
-                    category: "base",
-                    enabled: false
-                }, {
-                    layer: new WorldWind.BingAerialWithLabelsLayer(),
-                    category: "base",
-                    enabled: true
-                }, {
-                    layer: new WorldWind.BingRoadsLayer(),
-                    category: "overlay",
-                    enabled: false
-                }, {
-                    layer: new WorldWind.CompassLayer(),
-                    category: "setting",
-                    enabled: true
-                }, {
-                    layer: new WorldWind.CoordinatesDisplayLayer(wwd),
-                    category: "setting",
-                    enabled: true
-                }, {
-                    layer: new WorldWind.ViewControlsLayer(wwd),
-                    category: "setting",
-                    enabled: true,
-                }];
+        // Define the layers to be added to the globe.
+        let layerConfig = [{
+                layer: new WorldWind.BMNGOneImageLayer(),
+                category: "background",
+                enabled: true
+            }, {
+                layer: new WorldWind.BMNGLayer(),
+                category: "base",
+                enabled: true
+            }, {
+                layer: new WorldWind.BMNGLandsatLayer(),
+                category: "base",
+                enabled: false
+            }, {
+                layer: new WorldWind.BingAerialLayer(),
+                category: "base",
+                enabled: false
+            }, {
+                layer: new WorldWind.BingAerialWithLabelsLayer(),
+                category: "base",
+                enabled: false
+            }, {
+                layer: new WorldWind.BingRoadsLayer(),
+                category: "overlay",
+                enabled: false
+            }, {
+                layer: new WorldWind.CompassLayer(),
+                category: "setting",
+                enabled: true
+            }, {
+                layer: new WorldWind.CoordinatesDisplayLayer(this.wwd),
+                category: "setting",
+                enabled: true
+            }, {
+                layer: new WorldWind.ViewControlsLayer(this.wwd),
+                category: "setting",
+                enabled: true,
+            }];
 
-            // Apply the layer options and add the layers to the globe
-            for (let i = 0; i < layerConfig.length; i++) {
-                let layer = layerConfig[i].layer;
-                // Set common layer properties
-                layer.enabled = layerConfig[i].enabled;
-                layer.opacity = layerConfig[i].opacity ? layerConfig[i].opacity : 1.0;
-                // Add new category property to the layer for layer management 
-                layer.category = layerConfig[i].category;
+        // Apply the layer options and add the layers to the globe
+        layerConfig.forEach(config => this.addLayer(config));
 
-                // Add the layer to the globe
-                wwd.addLayer(layer);
-            }
+        this.setState({baseLayers: this.baseLayers});
+        this.setState({overlayLayers: this.overlayLayers});
+        this.setState({settingLayers: this.settingLayers});
 
-            if (this.props.onMapCreated && typeof this.props.onMapCreated === "function") {
-                this.props.onMapCreated(wwd);
-            }
+        if (this.props.onMapCreated && typeof this.props.onMapCreated === "function") {
+            this.props.onMapCreated(this.wwd);
         }
     }
 

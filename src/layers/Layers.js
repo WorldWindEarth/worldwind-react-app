@@ -25,9 +25,9 @@ export default class Layers extends Component {
                     </h5>
                 </div>
                 <div className="card-body">
-                    <BaseLayers layers={this.props.globe.overlayLayers} globe={this.props.globe}/>
+                    <BaseLayers layers={this.props.globe.state.overlayLayers} globe={this.props.globe}/>
                     <hr/>
-                    <BaseLayers layers={this.props.globe.baseLayers} globe={this.props.globe}/>
+                    <BaseLayers layers={this.props.baseLayers} globe={this.props.globe}/>
                 </div>
             </div>
         );

@@ -13,7 +13,10 @@ const globe = ReactDOM.render(
 );
 
 ReactDOM.render(
-  <Layers globe={globe} />,
+  <Layers 
+      baseLayers={globe.state.baseLayers} 
+      overlayLayers={globe.state.overlayLayers}
+      globe={globe} />,
   document.getElementById('layers')
 );
 
