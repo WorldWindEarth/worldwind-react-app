@@ -12,8 +12,7 @@ import './Layers.css';
 export default class LayerButton extends Component {
     constructor(props) {
         super(props);
-        this.state = {enabled: props.layer.enabled};
-        this.toggleLayer = this.toggleLayer.bind(this);
+        this.onClickHandler = this.onClickHandler.bind(this);
     }
     
     static propTypes = {
@@ -21,21 +20,19 @@ export default class LayerButton extends Component {
         globe: PropTypes.instanceOf(Globe).isRequired
     }   
 
-    toggleLayer(e) {
-        const layer = this.props.layer;
-        this.props.globe.toggleLayerEnabled(layer);
-        this.setState({enabled: layer.enabled});
+    onClickHandler(e) {
+        this.props.globe.toggleLayer(this.props.layer);
     }
 
     render() {
         const buttonClass = "list-group-item list-group-item-action"
-            + (this.state.enabled ? " active" : "");
+            + (this.props.enabled ? " active" : "");
 
         return (
             <button 
                 type="button" 
                 className={buttonClass} 
-                onClick={this.toggleLayer}>
+                onClick={this.onClickHandler}>
                 {this.props.layer.displayName}
             </button>
             );

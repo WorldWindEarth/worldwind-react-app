@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import Globe from '../Globe';
-import SettingLayers from './SettingLayers';
+import LayerList from '../layers/LayerList';
 
 export default class Settings extends Component {
         
@@ -22,7 +22,7 @@ export default class Settings extends Component {
                         </h5>
                 </div>
                 <div className="card-body">
-                    <SettingLayers globe={this.props.globe} />
+                    <LayerList layers={this.props.settingLayers} globe={this.props.globe}/>
                 </div>
             </div>
         );

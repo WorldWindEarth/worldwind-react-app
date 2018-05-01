@@ -2,18 +2,19 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import Globe from '../Globe'
-import BaseLayers from './BaseLayers';
-import OverlayLayers from './OverlayLayers';
+import LayerList from './LayerList';
 import './Layers.css';
 
 export default class Layers extends Component {
-    
+        constructor(props) {
+        super(props);
+    }
     static propTypes = {
-        globe: PropTypes.instanceOf(Globe).isRequired,
+        globe: PropTypes.instanceOf(Globe)
     }   
 
     render() {
-        // Create a Bootstrap card that renders the layer lists
+        // Create a Bootstrap card that renders the base and overlay layer lists
         return (
             <div className="card globe-card w-100">
                 <div className="card-header">
@@ -25,9 +26,9 @@ export default class Layers extends Component {
                     </h5>
                 </div>
                 <div className="card-body">
-                    <BaseLayers layers={this.props.globe.state.overlayLayers} globe={this.props.globe}/>
+                    <LayerList layers={this.props.overlayLayers} globe={this.props.globe}/>
                     <hr/>
-                    <BaseLayers layers={this.props.baseLayers} globe={this.props.globe}/>
+                    <LayerList layers={this.props.baseLayers} globe={this.props.globe}/>
                 </div>
             </div>
         );

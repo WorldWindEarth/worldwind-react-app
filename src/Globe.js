@@ -7,70 +7,85 @@ export default class Globe extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            baseLayers: [],
-            overlayLayers: [],
-            settingLayers: []
-        };
         this.wwd = null;
     }
 
     get baseLayers() {
-        return this.wwd.layers.filter(layer => layer.category === 'base');
+        if (this.wwd) {
+            return this.wwd.layers.filter(layer => layer.category === 'base');
+        } else {
+            return [];
+        }
     }
 
     get overlayLayers() {
-        return this.wwd.layers.filter(layer => layer.category === 'overlay');
+        if (this.wwd) {
+            return this.wwd.layers.filter(layer => layer.category === 'overlay');
+        } else {
+            return [];
+        }
     }
 
     get settingLayers() {
-        return this.wwd.layers.filter(layer => layer.category === 'setting');
+        if (this.wwd) {
+            return this.wwd.layers.filter(layer => layer.category === 'setting');
+        } else {
+            return [];
+        }
     }
 
     addLayer(config) {
-        let layer = config.layer;
-        // Set common layer properties
-        layer.enabled = config.enabled;
-        layer.opacity = config.opacity ? config.opacity : 1.0;
-        // Add new category property to the layer for layer management 
-        layer.category = config.category;
+        // Expecting a configuration object, but we can accomodate regular Layers as well
+        let layer = (config instanceof WorldWind.Layer) ? config : config.layer;
+
+        // Apply configuration objects to the layer
+        if (typeof config.enabled !== 'undefined') {
+            layer.enabled = config.enabled;
+        }
+        if (typeof config.opacity !== 'undefined') {
+            layer.opacity = config.opacity;
+        }
+        if (typeof config.minActiveAltitude !== 'undefined') {
+            layer.minActiveAltitude = config.minActiveAltitude;
+        }
+
+        // Assign a category property for layer management 
+        if (typeof config.category !== 'undefined') {
+            layer.category = config.category;
+        } else {
+            layer.category = 'overlay';
+        }
+
         // Add the layer to the globe
         this.wwd.addLayer(layer);
-    
+
+        // Publish the changes
+        this.publishUpdate(layer.category);
     }
-    toggleLayerEnabled(layer) {
-        // Handle base layer mutual exclusivity rule - only one can be enabled at a time
+
+    toggleLayer(layer) {
+        // Rule: only one "base" layer can be enabled at a time
         if (layer.category === 'base') {
             this.wwd.layers.forEach(function (item) {
                 if (item.category === 'base' && item !== layer) {
                     item.enabled = false;
                 }
             })
-            this.setState({baseLayers: this.baseLayers});
         }
+        // Toggle the selected layer's visibility
         layer.enabled = !layer.enabled;
+
+        this.publishUpdate(layer.category);
     }
 
-    shouldComponentUpdate() {
-        // WorldWind is not a regular React UI component. It should
-        // be loaded once and never be updated again
-        return false;
-    }
-
-    componentDidMount() {
-        // Code to execute when the component is called and mounted.
-        // Usual WorldWind boilerplate (creating WorldWindow, 
-        // adding layers, etc.) applies here.
-
-        // Create a World Window for the canvas. Note passing the
-        // Canvas id through a React ref.
-        this.wwd = new WorldWind.WorldWindow(this.refs.globeCanvas.id);
-
+    initializeLayers() {
         // Define the layers to be added to the globe.
+
         let layerConfig = [{
                 layer: new WorldWind.BMNGOneImageLayer(),
                 category: "background",
-                enabled: true
+                enabled: true,
+                minActiveAltitude: 0   // override the default value of 3e6;
             }, {
                 layer: new WorldWind.BMNGLayer(),
                 category: "base",
@@ -90,7 +105,8 @@ export default class Globe extends Component {
             }, {
                 layer: new WorldWind.BingRoadsLayer(),
                 category: "overlay",
-                enabled: false
+                enabled: false,
+                opacity: 0.8
             }, {
                 layer: new WorldWind.CompassLayer(),
                 category: "setting",
@@ -105,12 +121,41 @@ export default class Globe extends Component {
                 enabled: true,
             }];
 
-        // Apply the layer options and add the layers to the globe
+        // Add the layers to the globe
         layerConfig.forEach(config => this.addLayer(config));
+    }
 
-        this.setState({baseLayers: this.baseLayers});
-        this.setState({overlayLayers: this.overlayLayers});
-        this.setState({settingLayers: this.settingLayers});
+    publishUpdate(category) {
+        const timestamp = new Date();
+        switch (category) {
+            case 'base':
+                this.props.onUpdate({baseLayers: {layers: this.baseLayers, lastUpdated: timestamp}});
+                break;
+            case 'overlay':
+                this.props.onUpdate({overlayLayers: {layers: this.overlayLayers, lastUpdated: timestamp}});
+                break;
+            case 'setting':
+                this.props.onUpdate({settingLayers: {layers: this.settingLayers, lastUpdated: timestamp}});
+                break;
+        }
+    }
+
+    shouldComponentUpdate() {
+        // WorldWind is not a regular React UI component. It should
+        // be loaded once and never be updated again
+        return false;
+    }
+
+    componentDidMount() {
+        // Code to execute when the component is called and mounted.
+        // Usual WorldWind boilerplate (creating WorldWindow, 
+        // adding layers, etc.) applies here.
+
+        // Create a World Window for the canvas. Note passing the
+        // Canvas id through a React ref.
+        this.wwd = new WorldWind.WorldWindow(this.refs.globeCanvas.id);
+
+        this.initializeLayers();
 
         if (this.props.onMapCreated && typeof this.props.onMapCreated === "function") {
             this.props.onMapCreated(this.wwd);
