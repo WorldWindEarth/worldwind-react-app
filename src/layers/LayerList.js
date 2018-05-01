@@ -7,7 +7,7 @@ import './Layers.css'
 
 export default class LayerList extends Component {
     static propTypes = {
-        layers: PropTypes.object.isRequired,
+        layers: PropTypes.array.isRequired,
         globe: PropTypes.instanceOf(Globe)
     }   
 
@@ -15,7 +15,7 @@ export default class LayerList extends Component {
         // Create a list of items for React to render; 
         // each item must have a unique key
         let nextKey = 0;
-        let layerElements = this.props.layers.layers.map((layer) =>
+        let layerElements = this.props.layers.map((layer) =>
             <LayerButton key={nextKey++} layer={layer} enabled={layer.enabled} globe={this.props.globe} />
         );
         // Reverse the layers so the top-most layer is displayed first

@@ -7,6 +7,7 @@ import LayerList from '../layers/LayerList';
 export default class Settings extends Component {
         
     static propTypes = {
+        settingLayers: PropTypes.object.isRequired,
         globe: PropTypes.instanceOf(Globe).isRequired
     } 
     
@@ -22,7 +23,7 @@ export default class Settings extends Component {
                         </h5>
                 </div>
                 <div className="card-body">
-                    <LayerList layers={this.props.settingLayers} globe={this.props.globe}/>
+                    <LayerList layers={this.props.settingLayers.layers} globe={this.props.globe}/>
                 </div>
             </div>
         );

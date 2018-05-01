@@ -49,7 +49,6 @@ export default class App extends Component {
     }
     onUpdate(data) {
         this.setState(data);
-        this.forceUpdate();
     }
 }
 

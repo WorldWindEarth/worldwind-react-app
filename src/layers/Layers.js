@@ -10,6 +10,8 @@ export default class Layers extends Component {
         super(props);
     }
     static propTypes = {
+        baseLayers: PropTypes.object.isRequired,
+        overlayLayers: PropTypes.object.isRequired,
         globe: PropTypes.instanceOf(Globe)
     }   
 
@@ -26,9 +28,9 @@ export default class Layers extends Component {
                     </h5>
                 </div>
                 <div className="card-body">
-                    <LayerList layers={this.props.overlayLayers} globe={this.props.globe}/>
+                    <LayerList layers={this.props.overlayLayers.layers} globe={this.props.globe}/>
                     <hr/>
-                    <LayerList layers={this.props.baseLayers} globe={this.props.globe}/>
+                    <LayerList layers={this.props.baseLayers.layers} globe={this.props.globe}/>
                 </div>
             </div>
         );
