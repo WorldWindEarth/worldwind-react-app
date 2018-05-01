@@ -74,6 +74,8 @@ export default class Globe extends Component {
         }
         // Toggle the selected layer's visibility
         layer.enabled = !layer.enabled;
+        // Trigger a redraw so the globe shows the new layer state ASAP
+        this.wwd.redraw();
 
         this.publishUpdate(layer.category);
     }
@@ -107,6 +109,18 @@ export default class Globe extends Component {
                 category: "overlay",
                 enabled: false,
                 opacity: 0.8
+            }, {
+                layer: new WorldWind.AtmosphereLayer(),
+                category: "setting",
+                enabled: true
+            }, {
+                layer: new WorldWind.StarFieldLayer(),
+                category: "setting",
+                enabled: true
+            }, {
+                layer: new WorldWind.ShowTessellationLayer(),
+                category: "setting",
+                enabled: false
             }, {
                 layer: new WorldWind.CompassLayer(),
                 category: "setting",
