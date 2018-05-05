@@ -11,11 +11,11 @@ export default class Globe extends Component {
         this.wwd = null;
         this.nextLayerId = 1;
     }
-    
-    static propTypes = {
-        onUpdate: PropTypes.func.isRequired
-    }   
-    
+
+    redraw() {
+        this.wwd.redraw();
+    }
+
     get baseLayers() {
         if (this.wwd) {
             return this.wwd.layers.filter(layer => layer.category === 'base');

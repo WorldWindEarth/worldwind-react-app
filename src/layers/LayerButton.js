@@ -23,6 +23,7 @@ export default class LayerButton extends Component {
 
     onClickHandler(e) {
         this.props.globe.toggleLayer(this.props.layer);
+        this.props.globe.redraw();
     }
 
     render() {
