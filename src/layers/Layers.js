@@ -6,9 +6,7 @@ import LayerList from './LayerList';
 import './Layers.css';
 
 export default class Layers extends Component {
-        constructor(props) {
-        super(props);
-    }
+
     static propTypes = {
         baseLayers: PropTypes.object.isRequired,
         overlayLayers: PropTypes.object.isRequired,

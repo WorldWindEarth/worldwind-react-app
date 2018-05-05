@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import WorldWind from '@nasaworldwind/worldwind';
+import PropTypes from 'prop-types';
 
 import './Globe.css';
 
@@ -8,6 +9,7 @@ export default class Globe extends Component {
     constructor(props) {
         super(props);
         this.wwd = null;
+        this.nextLayerId = 1;
     }
 
     redraw() {
@@ -42,7 +44,7 @@ export default class Globe extends Component {
         // Expecting a configuration object, but we can accomodate regular Layers as well
         let layer = (config instanceof WorldWind.Layer) ? config : config.layer;
 
-        // Apply configuration objects to the layer
+        // Apply configuration options to the layer
         if (typeof config.enabled !== 'undefined') {
             layer.enabled = config.enabled;
         }
@@ -52,13 +54,16 @@ export default class Globe extends Component {
         if (typeof config.minActiveAltitude !== 'undefined') {
             layer.minActiveAltitude = config.minActiveAltitude;
         }
-
+        
         // Assign a category property for layer management 
         if (typeof config.category !== 'undefined') {
             layer.category = config.category;
         } else {
             layer.category = 'overlay';
         }
+        
+        // Assign a unique layer ID to ease layer management 
+        layer.uniqueId = this.nextLayerId++;
 
         // Add the layer to the globe
         this.wwd.addLayer(layer);
@@ -114,21 +119,13 @@ export default class Globe extends Component {
                 enabled: false,
                 opacity: 0.8
             }, {
-                layer: new WorldWind.AtmosphereLayer(),
-                category: "setting",
-                enabled: true
-            }, {
-                layer: new WorldWind.StarFieldLayer(),
-                category: "setting",
-                enabled: true
-            }, {
                 layer: new WorldWind.ShowTessellationLayer(),
                 category: "setting",
                 enabled: false
             }, {
                 layer: new WorldWind.CompassLayer(),
                 category: "setting",
-                enabled: true
+                enabled: false
             }, {
                 layer: new WorldWind.CoordinatesDisplayLayer(this.wwd),
                 category: "setting",
@@ -136,7 +133,15 @@ export default class Globe extends Component {
             }, {
                 layer: new WorldWind.ViewControlsLayer(this.wwd),
                 category: "setting",
-                enabled: true,
+                enabled: true
+            }, {
+                layer: new WorldWind.StarFieldLayer(),
+                category: "setting",
+                enabled: true
+            }, {
+                layer: new WorldWind.AtmosphereLayer(),
+                category: "setting",
+                enabled: true
             }];
 
         // Add the layers to the globe
@@ -144,6 +149,7 @@ export default class Globe extends Component {
     }
 
     publishUpdate(category) {
+        // Lift-up the changed layer category state to the parent via a props function.
         const timestamp = new Date();
         switch (category) {
             case 'base':
@@ -155,6 +161,7 @@ export default class Globe extends Component {
             case 'setting':
                 this.props.onUpdate({settingLayers: {layers: this.settingLayers, lastUpdated: timestamp}});
                 break;
+            default:
         }
     }
 
