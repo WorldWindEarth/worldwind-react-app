@@ -16,10 +16,6 @@ export default class Globe extends Component {
         this.wwd.redraw();
     }
 
-    redraw() {
-        this.wwd.redraw();
-    }
-
     get baseLayers() {
         if (this.wwd) {
             return this.wwd.layers.filter(layer => layer.category === 'base');
