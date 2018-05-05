@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Globe from './Globe';
+import Globe from './globe/Globe';
 import Layers from './layers/Layers';
 import Markers from './markers/Markers';
 import Settings from './settings/Settings';
@@ -16,8 +16,17 @@ export default class App extends Component {
         };
         this.globe = React.createRef();
     }
+    
     /**
-     * 
+     * onUpdate is a prop function provided to the Globe component for lifting up it state to the
+     * App component.
+     */
+    onUpdate(data) {
+        this.setState(data);
+    }
+    
+    /**
+     * Render's the globe and the globe's overlays.
      */
     render() {
         return (
@@ -33,7 +42,7 @@ export default class App extends Component {
                                 overlayLayers={this.state.overlayLayers} 
                                 globe={this.globe.current} />
                         </div>
-                        
+            
                         <div id="markers" className="collapse interactive">
                             <Markers/>
                         </div>
@@ -46,9 +55,6 @@ export default class App extends Component {
                 </div>
             </div>
             );
-    }
-    onUpdate(data) {
-        this.setState(data);
     }
 }
 
