@@ -14,9 +14,8 @@ export default class LayerList extends Component {
     render() {
         // Create a list of items for React to render; 
         // each item must have a unique key
-        let nextKey = 0;
         let layerElements = this.props.layers.map((layer) =>
-            <LayerButton key={nextKey++} layer={layer} enabled={layer.enabled} globe={this.props.globe} />
+            <LayerButton key={layer.uniqueId} layer={layer} enabled={layer.enabled} globe={this.props.globe} />
         );
         // Reverse the layers so the top-most layer is displayed first
         layerElements.reverse();
