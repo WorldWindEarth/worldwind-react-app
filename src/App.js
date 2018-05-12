@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { observer } from "mobx-react";
 
+import MainMenu from './components/MainMenu';
 import Globe from './components/Globe';
 import Layers from './components/Layers';
 import Markers from './components/Markers';
@@ -35,31 +36,33 @@ const App = observer(class App extends Component {
 
     render() {
         return (
-            <div className="App">
-                <div className="worldwindow">
-                    <Globe ref={this.primaryGlobe} onUpdate={this.onUpdate.bind(this)} />
-                </div>
-                <div className="worldwindow-overlay noninteractive w-100">
-                    <div className="card-columns noninteractive w-100">
-                        <div id="layers" className="collapse interactive">
-                            <Layers
-                                baseLayers={this.state.baseLayers} 
-                                overlayLayers={this.state.overlayLayers} 
-                                globe={this.primaryGlobe.current} />
-                        </div>
-            
-                        <div id="markers" className="collapse interactive">
-                            <Markers/>
-                        </div>
-                        <div id="settings" className="collapse interactive">
-                            <Settings
-                                settingLayers={this.state.settingLayers} 
-                                globe={this.primaryGlobe.current} />
+            <div>
+                <MainMenu/>
+                <div className="App container-fluid p-0">
+                    <div className="worldwindow">
+                        <Globe ref={this.primaryGlobe} onUpdate={this.onUpdate.bind(this)} />
+                    </div>
+                    <div className="worldwindow-overlay noninteractive w-100">
+                        <div className="card-columns noninteractive w-100">
+                            <div id="layers" className="collapse interactive">
+                                <Layers
+                                    baseLayers={this.state.baseLayers} 
+                                    overlayLayers={this.state.overlayLayers} 
+                                    globe={this.primaryGlobe.current} />
+                            </div>
+
+                            <div id="markers" className="collapse interactive">
+                                <Markers/>
+                            </div>
+                            <div id="settings" className="collapse interactive">
+                                <Settings
+                                    settingLayers={this.state.settingLayers} 
+                                    globe={this.primaryGlobe.current} />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            );
+            </div>);
     }
 });
 

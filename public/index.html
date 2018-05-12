@@ -23,70 +23,8 @@
     </head>
     <body>
 
-        <!--Main Menu-->
-        <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
-            <!--Branding icon and text-->
-            <a class="navbar-brand" href="https://worldwind.arc.nasa.gov/web">
-                <img src="%PUBLIC_URL%/images/nasa-logo.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-                WorldWind
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"
-                    aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!--Main menu content-->
-            <div class="collapse navbar-collapse" id="main-menu">
-                <ul class="navbar-nav mr-auto">
-                    <!--Layers-->
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#layers" role="button">
-                            <span class="fas fa-list" aria-hidden="true"></span>
-                            <span class="d-md-none d-lg-inline" aria-hidden="true">Layers</span>
-                        </a>
-                    </li>
-                    <!--Markers-->
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#markers" role="button">
-                            <span class="fas fa-map-marker-alt" aria-hidden="true"></span>
-                            <span class="d-md-none d-lg-inline" aria-hidden="true">Markers</span>
-                        </a>
-                    </li>
-                    <!--Settings-->
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#settings" role="button">
-                            <span class="fas fa-cog" aria-hidden="true"></span>
-                            <span class="d-md-none d-lg-inline" aria-hidden="true">Settings</span>
-                        </a>
-                    </li>
-                    <!--Draw-->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            <span class="fas fa-pencil-alt" aria-hidden="true"></span>
-                            <span class="d-md-none d-lg-inline" aria-hidden="true">Draw</span>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown01">
-                            <a class="dropdown-item" href="#" role="button">Shape</a>
-                            <a class="dropdown-item" href="#">Another shape</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-                </ul>
-                <!--Search-->
-                <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success disabled" type="submit">
-                        <span class="fas fa-search" aria-hidden="true"></span>
-                    </button>
-                </form>
-            </div>
-        </nav>
-
         <!-- Main content: use container-fluid for 100% width and set padding to 0 -->
-        <main role="main" class="container-fluid p-0">
             <div id="root"></div>
-        </main>
 
         <!-- JavaScript placed at the end of the document so the page loads faster -->
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
