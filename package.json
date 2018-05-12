@@ -5,12 +5,16 @@
   "homepage": "https://emxsys.github.io/worldwind-react-app",
   "dependencies": {
     "@nasaworldwind/worldwind": "^0.9.0",
+    "ajv": "^6.5.0",
+    "bootstrap": "^4.1.1",
+    "jquery": "^3.3.1",
     "mobx": "^4.2.1",
     "mobx-react": "^5.1.2",
+    "popper.js": "^1.14.3",
+    "prop-types": "^15.5.7",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "react-scripts": "1.1.4",
-    "prop-types": "^15.5.7"
+    "react-scripts": "1.1.4"
   },
   "devDependencies": {
     "gh-pages": "^1.1.0"
