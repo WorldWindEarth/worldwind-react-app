@@ -5,6 +5,8 @@
   "homepage": "https://emxsys.github.io/worldwind-react-app",
   "dependencies": {
     "@nasaworldwind/worldwind": "^0.9.0",
+    "mobx": "^4.2.1",
+    "mobx-react": "^5.1.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-scripts": "1.1.4",
@@ -19,6 +21,6 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"  
-    }
+    "deploy": "gh-pages -d build"
+  }
 }

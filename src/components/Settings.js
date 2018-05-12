@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-import Globe from '../Globe';
-import LayerList from '../layers/LayerList';
+import Globe from './Globe';
+import LayerList from './LayerList';
 
 export default class Settings extends Component {
         
     static propTypes = {
         settingLayers: PropTypes.object.isRequired,
-        globe: PropTypes.instanceOf(Globe).isRequired
+        globe: PropTypes.instanceOf(Globe)
     } 
     
     render() {

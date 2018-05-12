@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import WorldWind from '@nasaworldwind/worldwind';
 import PropTypes from 'prop-types';
 
-import Globe from '../Globe';
+import Globe from './Globe';
 import './Layers.css';
 
 /**
@@ -23,7 +23,6 @@ export default class LayerButton extends Component {
 
     onClickHandler(e) {
         this.props.globe.toggleLayer(this.props.layer);
-        this.props.globe.redraw();
     }
 
     render() {
