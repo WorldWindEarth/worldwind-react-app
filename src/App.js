@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer } from "mobx-react";
 
-import MainMenu from './components/MainMenu';
+import NavBar from './components/NavBar';
 import Globe from './components/Globe';
 import Layers from './components/Layers';
 import Markers from './components/Markers';
@@ -37,7 +37,7 @@ const App = observer(class App extends Component {
     render() {
         return (
             <div>
-                <MainMenu/>
+                <NavBar/>
                 <div className="App container-fluid p-0">
                     <div className="worldwindow">
                         <Globe ref={this.primaryGlobe} onUpdate={this.onUpdate.bind(this)} />
