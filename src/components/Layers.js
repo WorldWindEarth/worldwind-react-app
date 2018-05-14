@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-import Globe from './Globe'
+import Map from './Map'
 import LayerList from './LayerList';
 import './Layers.css';
 
@@ -10,7 +10,7 @@ export default class Layers extends Component {
     static propTypes = {
         baseLayers: PropTypes.object.isRequired,
         overlayLayers: PropTypes.object.isRequired,
-        globe: PropTypes.instanceOf(Globe)
+        globe: PropTypes.instanceOf(Map)
     }   
 
     render() {

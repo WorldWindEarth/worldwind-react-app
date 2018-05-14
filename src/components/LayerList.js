@@ -1,14 +1,14 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 
-import Globe from './Globe'
+import Map from './Map'
 import LayerButton from './LayerButton'
 import './Layers.css'
 
 export default class LayerList extends Component {
     static propTypes = {
         layers: PropTypes.array.isRequired,
-        globe: PropTypes.instanceOf(Globe)
+        globe: PropTypes.instanceOf(Map)
     }   
 
     render() {

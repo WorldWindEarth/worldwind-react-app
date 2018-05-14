@@ -13,9 +13,9 @@ import { WorldWindFixes } from './WorldWindFixes'
      * specific logic for interacting with layers.
      * @param {String} canvasId
      * @param {String|null} projectionName
-     * @returns {Earth}
+     * @returns {Globe}
      */
-    export default class Earth {
+    export default class Globe {
     constructor(canvasId, projectionName) {
 
         // Create a WorldWindow globe on the specified HTML5 canvas
@@ -104,6 +104,7 @@ import { WorldWindFixes } from './WorldWindFixes'
      * the layer.
      * @param {WorldWind.Layer} layer
      * @param {Object|null} options E.g., {category: "base", enabled: true}
+     * @returns {Number} Unique layer id in this globe
      */
     addLayer(layer, options) {
         // Copy all properties defined on the options object to the layer
@@ -126,6 +127,8 @@ import { WorldWindFixes } from './WorldWindFixes'
         this.wwd.addLayer(layer);
         // Signal a change in the category
         this.updateCategoryTimestamp(layer.category);
+        
+        return layer.uniqueId;
     }
 
     /**
@@ -171,6 +174,17 @@ import { WorldWindFixes } from './WorldWindFixes'
         let timestamp = this.getCategoryTimestamp(category);
         timestamp.set(Date.now());
     }
+    
+    /**
+     * Returns the layer with the given id.
+     * @param {Number} id Unique layer id assigned by addLayer
+     * @returns {WorldWind.Layer|null}
+     */
+    getLayer(id) {
+        let layers = this.wwd.layers.filter(layer => layer.uniqueId === id);
+        return layers.length > 0 ? layers[0] : null;
+    }
+    
     /**
      * Returns the first layer with the given name.
      * @param {String} name

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import WorldWind from '@nasaworldwind/worldwind';
 import PropTypes from 'prop-types';
 
-import Globe from './Globe';
+import Map from './Map';
 import './Layers.css';
 
 /**
@@ -18,7 +18,7 @@ export default class LayerButton extends Component {
     
     static propTypes = {
         layer: PropTypes.instanceOf(WorldWind.Layer).isRequired,
-        globe: PropTypes.instanceOf(Globe).isRequired
+        globe: PropTypes.instanceOf(Map).isRequired
     }   
 
     onClickHandler(e) {
