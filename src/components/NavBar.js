@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
+import 'bootstrap';
 
-import SearchBox from './SearchBox'
+import Search from './Search'
 
 class NavBar extends Component {
     render() {
@@ -34,10 +35,9 @@ class NavBar extends Component {
                             </a>
                         </li>
                     </ul>
-                    <SearchBox/>
+                    <Search map={this.props.map}/>
                 </div>
             </nav>
-
         );
     }
 };

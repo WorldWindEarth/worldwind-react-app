@@ -1,0 +1,32 @@
+.preview-globe {
+    height: 200px;
+}
+
+/*When the modal fills the screen it has no margin on top and bottom*/
+/*Centers the modal*/
+.modal-dialog {
+  margin: 0 auto;
+}
+
+/*Sets the maximum height of the entire modal to 100% of the screen height*/
+.modal-content {
+  max-height: 100vh;
+}
+
+/*Sets the maximum height of the modal body to 90% of the screen height*/
+.modal-body {
+  max-height: 90vh;
+}
+
+/*Sets the height of a modal's canvas to 30% or 200px*/
+.modal-body-canvas {
+  max-height: 200px;
+  height: 30vh;
+}
+
+/*Sets the height of a modal's canvas to 60% minus the height of a footer*/
+.modal-body-table {
+  max-height: calc(60vh - 71px);
+  overflow-y: auto;
+}
+
