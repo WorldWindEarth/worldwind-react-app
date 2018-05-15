@@ -18,11 +18,11 @@ export default class LayerButton extends Component {
     
     static propTypes = {
         layer: PropTypes.instanceOf(WorldWind.Layer).isRequired,
-        globe: PropTypes.instanceOf(Map).isRequired
+        map: PropTypes.instanceOf(Map).isRequired
     }   
 
     onClickHandler(e) {
-        this.props.globe.toggleLayer(this.props.layer);
+        this.props.map.toggleLayer(this.props.layer);
     }
 
     render() {

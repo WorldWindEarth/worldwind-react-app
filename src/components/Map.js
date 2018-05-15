@@ -44,10 +44,10 @@ export default class Map extends Component {
         if (this.props.onUpdate) {
             // Lift-up the layer category state to the parent via a props function
             let key = category + "Layers";
-            let state = {layers: this.getLayers(category), lastUpdated: new Date()};
+            let state = {layers: this.getLayers(category), lastUpdated: Date.now()};
             let data = {};
             data[key] = state;
-            // Update the parent's statu via the props function callback
+            // Update the parent's state via the props function callback
             this.props.onUpdate(data);
         }
     }

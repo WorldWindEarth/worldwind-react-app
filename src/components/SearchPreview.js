@@ -38,7 +38,7 @@ class SearchPreview  extends Component{
         this.map = this.mapRef.current;
         this.map.addLayer(new WorldWind.BingRoadsLayer(), { detailControl: 1.25 });
         
-        // Create pushpin placemarks to represent the results
+        // Create pushpin placemarks to represent the results on the globe
         let resultsLayer = new WorldWind.RenderableLayer();
         let placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
         placemarkAttributes.imageSource = WorldWind.configuration.baseUrl + "images/pushpins/castshadow-red.png";
@@ -77,7 +77,6 @@ class SearchPreview  extends Component{
                 </tr>    
             );
         }
-        
         const tableRows = this.props.results.map((result) =>
             <TableRow result={result}/>
         );
@@ -98,9 +97,7 @@ class SearchPreview  extends Component{
                         </div>
                         <div className="modal-body-table">
                             <div className="alert alert-warning alert-dismissible fade show" role="alert" data-bind="visible: showApiWarning">
-                                MapQuest API key missing. Get a free key at 
-                                <a href="https://developer.mapquest.com/" className="alert-link" target="_blank">developer.mapquest.com</a>
-                                and set the MAPQUEST_API_KEY variable to your key.
+                                MapQuest API key missing. Get a free key at <a href="https://developer.mapquest.com/" className="alert-link" target="_blank">developer.mapquest.com</a> and set the MAPQUEST_API_KEY variable to your key.
                                 <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>                                        

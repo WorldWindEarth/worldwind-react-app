@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { observer } from "mobx-react";
 import WorldWind from '@nasaworldwind/worldwind';
 
-import EnhancedAtmosphereLayer from './api/globe/EnhancedAtmosphereLayer'
-import EoxOpenStreetMapLayer from './api/globe/EoxOpenStreetMapLayer'
-import EoxSentinal2CloudlessLayer from './api/globe/EoxSentinal2CloudlessLayer'
-import EoxSentinal2WithLabelsLayer from './api/globe/EoxSentinal2WithLabelsLayer'
+import EnhancedAtmosphereLayer from './api/globe/EnhancedAtmosphereLayer';
+import EoxOpenStreetMapLayer from './api/globe/EoxOpenStreetMapLayer';
+import EoxSentinal2CloudlessLayer from './api/globe/EoxSentinal2CloudlessLayer';
+import EoxSentinal2WithLabelsLayer from './api/globe/EoxSentinal2WithLabelsLayer';
+
 import Map from './components/Map';
 import NavBar from './components/NavBar';
 import Layers from './components/Layers';
@@ -18,13 +19,14 @@ const App = observer(class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            map: null,
-            baseLayers: {layers: [], lastUpdated: new Date()},
-            overlayLayers: {layers: [], lastUpdated: new Date()},
-            settingLayers: {layers: [], lastUpdated: new Date()}
+            baseLayers: {layers: [], lastUpdated: Date.now()},
+            overlayLayers: {layers: [], lastUpdated: Date.now()},
+            settingLayers: {layers: [], lastUpdated: Date.now()},
+            debugLayers: {layers: [], lastUpdated: Date.now()}
         };
-        // Holds a reference to the Globe component after rendering
+        // Holds a reference to the Map component after mounting
         this.mapRef = React.createRef();
+        this.map = null;
     }
     
     /**
@@ -36,12 +38,11 @@ const App = observer(class App extends Component {
     
     
     componentDidMount() {
-        // Create the WorldWindow
-        const map = this.mapRef.current;
-        this.setState({map: map});
+        // Get the component with the WorldWindow after mounting
+        this.map = this.mapRef.current;
         
         // Define the layers to be added to the globe.
-        let layerConfig = [
+        const layerConfig = [
             {layer: new WorldWind.BMNGLayer(),
                 options: {category: "base", enabled: true}},
             {layer: new WorldWind.BMNGLandsatLayer(),
@@ -60,9 +61,9 @@ const App = observer(class App extends Component {
                 options: {category: "overlay", enabled: false, opacity: 0.8}},
             {layer: new WorldWind.CompassLayer(),
                 options: {category: "setting", enabled: false}},
-            {layer: new WorldWind.CoordinatesDisplayLayer(map.globe.wwd),
+            {layer: new WorldWind.CoordinatesDisplayLayer(this.map.globe.wwd),
                 options: {category: "setting", enabled: true}},
-            {layer: new WorldWind.ViewControlsLayer(map.globe.wwd),
+            {layer: new WorldWind.ViewControlsLayer(this.map.globe.wwd),
                 options: {category: "setting", enabled: true}},
             {layer: new WorldWind.StarFieldLayer(),
                 options: {category: "setting", enabled: false}},
@@ -71,9 +72,8 @@ const App = observer(class App extends Component {
             {layer: new WorldWind.ShowTessellationLayer(),
                 options: {category: "debug", enabled: false}}
         ];
-
         // Add the layers to the globe
-        layerConfig.forEach(config => map.addLayer(config.layer, config.options));
+        layerConfig.forEach(config => this.map.addLayer(config.layer, config.options));
     }
     /**
      * Renders the globe and the panels that render the globe's contents.
@@ -83,27 +83,32 @@ const App = observer(class App extends Component {
     render() {
         return (
             <div>
-                <NavBar map={this.state.map}/>
+                <NavBar map={this.map}/>
                 <div className="App container-fluid p-0">
-                    <div className="worldwindow">
+                    <div className="globe">
                         <Map id="primary-globe" ref={this.mapRef} onUpdate={this.onUpdate.bind(this)} />
                     </div>
-                    <div className="worldwindow-overlay noninteractive w-100">
-                        <div className="card-columns noninteractive w-100">
+                    <div className="globe-overlay noninteractive">
+
+                    </div>
+                    <div className="globe-overlay noninteractive">
+                        <div className="card-columns noninteractive">
                             <div id="layers" className="collapse interactive">
                                 <Layers
                                     baseLayers={this.state.baseLayers} 
                                     overlayLayers={this.state.overlayLayers} 
-                                    globe={this.mapRef.current} />
+                                    map={this.map} />
                             </div>
 
                             <div id="markers" className="collapse interactive">
                                 <Markers/>
                             </div>
+                            
                             <div id="settings" className="collapse interactive">
                                 <Settings
                                     settingLayers={this.state.settingLayers} 
-                                    globe={this.mapRef.current} />
+                                    debugLayers={this.state.debugLayers} 
+                                    map={this.map} />
                             </div>
                         </div>
                     </div>

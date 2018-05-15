@@ -4,7 +4,21 @@ import 'bootstrap';
 import Search from './Search'
 
 class NavBar extends Component {
+    /**
+     * Renders a BootStrap NavBar with branding, buttons and a search box.
+     * @returns {String}
+     */
     render() {
+        function NavItem(props) {
+            return (
+                <li className="nav-item">
+                    <a className="nav-link" data-toggle="collapse" href={props.href} role="button">
+                        <span className={props.icon} aria-hidden="true"></span>
+                        <span className="d-md-none d-lg-inline" aria-hidden="true">{props.title}</span>
+                    </a>
+                </li>
+            );
+        }
         return (
             <nav className="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
                 <a className="navbar-brand" href="https://github.com/emxsys/worldwind-web-app">
@@ -16,24 +30,9 @@ class NavBar extends Component {
                 </button>
                 <div className="collapse navbar-collapse" id="main-menu">
                     <ul className="navbar-nav mr-auto">
-                        <li className="nav-item">
-                            <a className="nav-link" data-toggle="collapse" href="#layers" role="button">
-                                <span className="fas fa-list" aria-hidden="true"></span>
-                                <span className="d-md-none d-lg-inline" aria-hidden="true">Layers</span>
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" data-toggle="collapse" href="#markers" role="button">
-                                <span className="fas fa-map-marker-alt" aria-hidden="true"></span>
-                                <span className="d-md-none d-lg-inline" aria-hidden="true">Markers</span>
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" data-toggle="collapse" href="#settings" role="button">
-                                <span className="fas fa-cog" aria-hidden="true"></span>
-                                <span className="d-md-none d-lg-inline" aria-hidden="true">Settings</span>
-                            </a>
-                        </li>
+                        <NavItem title="Layers" icon="fas fa-list" href="#layers"/>
+                        <NavItem title="Markers" icon="fas fa-map-marker-alt" href="#markers"/>
+                        <NavItem title="Settings" icon="fas fa-cog" href="#settings"/>
                     </ul>
                     <Search map={this.props.map}/>
                 </div>

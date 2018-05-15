@@ -10,7 +10,7 @@ export default class Layers extends Component {
     static propTypes = {
         baseLayers: PropTypes.object.isRequired,
         overlayLayers: PropTypes.object.isRequired,
-        globe: PropTypes.instanceOf(Map)
+        map: PropTypes.instanceOf(Map)
     }   
 
     render() {
@@ -26,9 +26,9 @@ export default class Layers extends Component {
                     </h5>
                 </div>
                 <div className="card-body">
-                    <LayerList layers={this.props.overlayLayers.layers} globe={this.props.globe}/>
+                    <LayerList layers={this.props.overlayLayers.layers} map={this.props.map}/>
                     <hr/>
-                    <LayerList layers={this.props.baseLayers.layers} globe={this.props.globe}/>
+                    <LayerList layers={this.props.baseLayers.layers} map={this.props.map}/>
                 </div>
             </div>
         );
