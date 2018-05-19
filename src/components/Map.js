@@ -9,6 +9,7 @@ export default class Map extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {isGlobeValid: false};
         this.globe = null;
     }
 
@@ -53,8 +54,7 @@ export default class Map extends Component {
     }
 
     shouldComponentUpdate() {
-        // WorldWind is not a regular React UI component. It should
-        // be loaded once and never be updated again
+        // TODO: update if the canvas background color changes
         return false;
     }
 
@@ -67,6 +67,7 @@ export default class Map extends Component {
                 enabled: true,
                 minActiveAltitude: 0    // override the default value of 3e6;
             });
+        this.setState({isGlobeValid: true});
     }
 
     render() {
