@@ -7,13 +7,14 @@ import EoxOpenStreetMapLayer from './api/globe/EoxOpenStreetMapLayer';
 import EoxSentinal2CloudlessLayer from './api/globe/EoxSentinal2CloudlessLayer';
 import EoxSentinal2WithLabelsLayer from './api/globe/EoxSentinal2WithLabelsLayer';
 
-import Map from './components/Map';
 import NavBar from './components/NavBar';
+import Map from './components/Map';
+import Tools from './components/Tools';
 import Layers from './components/Layers';
 import Markers from './components/Markers';
 import Settings from './components/Settings';
-import './App.css';
 
+import './App.css';
 
 const App = observer(class App extends Component {
     constructor(props) {
@@ -26,6 +27,7 @@ const App = observer(class App extends Component {
         };
         // Holds a reference to the Map component after mounting
         this.mapRef = React.createRef();
+        this.markersRef = React.createRef();
         this.map = null;
     }
     
@@ -59,6 +61,8 @@ const App = observer(class App extends Component {
                 options: {category: "overlay", enabled: false, opacity: 0.8}},
             {layer: new EoxOpenStreetMapLayer(),
                 options: {category: "overlay", enabled: false, opacity: 0.8}},
+            {layer: new WorldWind.RenderableLayer("Markers"),
+                options: {category: "overlay", enabled: true}},
             {layer: new WorldWind.CompassLayer(),
                 options: {category: "setting", enabled: false}},
             {layer: new WorldWind.CoordinatesDisplayLayer(this.map.globe.wwd),
@@ -89,21 +93,22 @@ const App = observer(class App extends Component {
                         <Map id="primary-globe" ref={this.mapRef} onUpdate={this.onUpdate.bind(this)} />
                     </div>
                     <div className="globe-overlay noninteractive">
-
+                        <Tools 
+                            map={this.mapRef.current} 
+                            markers={this.markersRef.current}
+                            markersLayerName="Markers"/>
                     </div>
                     <div className="globe-overlay noninteractive">
-                        <div className="card-columns noninteractive">
+                        <div className="card-columns">
                             <div id="layers" className="collapse interactive">
                                 <Layers
                                     baseLayers={this.state.baseLayers} 
                                     overlayLayers={this.state.overlayLayers} 
                                     map={this.map} />
                             </div>
-
                             <div id="markers" className="collapse interactive">
-                                <Markers/>
+                                <Markers ref={this.markersRef}/>
                             </div>
-                            
                             <div id="settings" className="collapse interactive">
                                 <Settings
                                     settingLayers={this.state.settingLayers} 
