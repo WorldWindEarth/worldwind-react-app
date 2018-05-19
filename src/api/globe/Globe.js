@@ -8,14 +8,14 @@ import { observable } from "mobx";
 
 import { WorldWindFixes } from './WorldWindFixes'
 
-    /**
-     * The Globe encapulates the WorldWindow object (wwd) and provides application
-     * specific logic for interacting with layers.
-     * @param {String} canvasId
-     * @param {String|null} projectionName
-     * @returns {Globe}
-     */
-    export default class Globe {
+/**
+ * The Globe encapulates the WorldWindow object (wwd) and provides application
+ * specific logic for interacting with layers.
+ * @param {String} canvasId
+ * @param {String|null} projectionName
+ * @returns {Globe}
+ */
+export default class Globe {
     constructor(canvasId, projectionName) {
 
         // Create a WorldWindow globe on the specified HTML5 canvas
@@ -134,11 +134,11 @@ import { WorldWindFixes } from './WorldWindFixes'
     /**
      * Toggles the enabled state of the given layer and updates the layer
      * catetory timestamp. Applies a rule to the 'base' layers the ensures
-     * only one base layer is enabled.
+     * at max Ïonly one base layer is enabled.
      * @param {WorldWind.Layer} layer
      */
     toggleLayer(layer) {
-        // Apply rule: only one "base" layer can be enabled at a time
+        // Apply rule: only [0..1] "base" layers can be enabled at a time
         if (layer.category === 'base') {
             this.wwd.layers.forEach(function (item) {
                 if (item.category === 'base' && item !== layer) {
@@ -172,7 +172,7 @@ import { WorldWindFixes } from './WorldWindFixes'
      */
     updateCategoryTimestamp(category) {
         let timestamp = this.getCategoryTimestamp(category);
-        timestamp.set(Date.now());
+        timestamp.set(Date.now());  // observable
     }
     
     /**
@@ -195,4 +195,3 @@ import { WorldWindFixes } from './WorldWindFixes'
         return layers.length > 0 ? layers[0] : null;
     }
 }
-
