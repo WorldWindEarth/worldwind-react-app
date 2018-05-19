@@ -21,9 +21,9 @@ class NavBar extends Component {
         }
         return (
             <nav className="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
-                <a className="navbar-brand" href="https://github.com/emxsys/worldwind-web-app">
+                <a className="navbar-brand" href="https://github.com/emxsys/worldwind-react-app">
                     <img src="images/nasa-logo_32.png" width="32" height="32" className="d-inline-block align-top" alt=""/>
-                    WorldWind
+                    WorldWind React
                 </a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
