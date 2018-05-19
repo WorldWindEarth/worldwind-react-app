@@ -24,7 +24,7 @@ class SearchPreview  extends Component{
         results: PropTypes.array,
         handleHideModal: PropTypes.func,
         handleGotoSelection: PropTypes.func,
-        showApiWarning:PropTypes.boolean
+        showApiWarning: PropTypes.bool
     }  
     
     handlePreviewClick(result) {
@@ -55,7 +55,7 @@ class SearchPreview  extends Component{
             WorldWind.OFFSET_FRACTION, 0.3,
             WorldWind.OFFSET_FRACTION, 0.0);
             
-        this.props.results.foreach(item => {
+        this.props.results.forEach(item => {
             let placemark = new WorldWind.Placemark(
                 new WorldWind.Position(
                     parseFloat(item.lat),
