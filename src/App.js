@@ -32,7 +32,9 @@ const App = observer(class App extends Component {
     }
     
     /**
-     * A property function used to lift state up from the Globe and into the App.
+     * A property function used to lift state up from the Map into the App.
+     * 
+     * @param {Object} data An object to be merged into the App's state.
      */
     onUpdate(data) {
         this.setState(data);
@@ -90,7 +92,10 @@ const App = observer(class App extends Component {
                 <NavBar map={this.map}/>
                 <div className="App container-fluid p-0">
                     <div className="globe">
-                        <Map id="primary-globe" ref={this.mapRef} onUpdate={this.onUpdate.bind(this)} />
+                        <Map 
+                            id="primary-globe" 
+                            ref={this.mapRef} 
+                            onUpdate={this.onUpdate.bind(this)} />
                     </div>
                     <div className="globe-overlay noninteractive">
                         <Tools 
@@ -107,7 +112,10 @@ const App = observer(class App extends Component {
                                     map={this.map} />
                             </div>
                             <div id="markers" className="collapse interactive">
-                                <Markers ref={this.markersRef}/>
+                                <Markers 
+                                    ref={this.markersRef}
+                                    map={this.mapRef.current}
+                                    markersLayerName="Markers" />
                             </div>
                             <div id="settings" className="collapse interactive">
                                 <Settings
@@ -118,7 +126,8 @@ const App = observer(class App extends Component {
                         </div>
                     </div>
                 </div>
-            </div>);
+            </div>
+        );
     }
 });
 
