@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import WorldWind from '@nasaworldwind/worldwind';
-import bootstrap from 'bootstrap';
-
 import PropTypes from 'prop-types';
 
 import Map from './Map';
@@ -56,7 +54,7 @@ class Markers extends Component {
         function GotoButton(props) {
             return (
                 <button type="button" className="btn btn-light" onClick={(e) => self.gotoMarker(props.marker, e)}>
-                    <span><img width="16px" height="16px" src={props.marker.attributes.imageSource} />  </span>
+                    <span><img width="16px" height="16px" src={props.marker.attributes.imageSource} alt=""/>  </span>
                     {props.marker.label}
                 </button>
             );
