@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 
 const modalRoot = document.getElementById('modal-root');
@@ -13,7 +13,7 @@ const modalRoot = document.getElementById('modal-root');
  *   </Modal>
  * </code></pre>
  */
-export default class Modal extends Component {
+export default class Modal extends React.Component {
     constructor(props) {
         super(props);
         this.el = document.createElement('div');
