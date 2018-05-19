@@ -1,5 +1,4 @@
 ## Travis-CI YAML to publish WorldWind React app to GitHub Pages
-
 language: node_js
 node_js:
   - "stable"
