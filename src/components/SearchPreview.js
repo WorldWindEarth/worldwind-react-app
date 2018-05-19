@@ -19,6 +19,14 @@ class SearchPreview  extends Component{
         this.handlePreviewClick = this.handlePreviewClick.bind(this);
     }
     
+    static propTypes = {
+        map: PropTypes.instanceOf(Map),
+        results: PropTypes.array,
+        handleHideModal: PropTypes.func,
+        handleGotoSelection: PropTypes.func,
+        showApiWarning:PropTypes.boolean
+    }  
+    
     handlePreviewClick(result) {
         // Update the selection used for the Go To button
         this.setState({selection: result});
@@ -47,7 +55,7 @@ class SearchPreview  extends Component{
             WorldWind.OFFSET_FRACTION, 0.3,
             WorldWind.OFFSET_FRACTION, 0.0);
             
-        this.props.results.map(item => {
+        this.props.results.foreach(item => {
             let placemark = new WorldWind.Placemark(
                 new WorldWind.Position(
                     parseFloat(item.lat),
@@ -97,7 +105,7 @@ class SearchPreview  extends Component{
                         </div>
                         <div className="modal-body-table">
                             <div className="alert alert-warning alert-dismissible fade show" role="alert" data-bind="visible: showApiWarning">
-                                MapQuest API key missing. Get a free key at <a href="https://developer.mapquest.com/" className="alert-link" target="_blank">developer.mapquest.com</a> and set the MAPQUEST_API_KEY variable to your key.
+                                MapQuest API key missing. Get a free key at <a href="https://developer.mapquest.com/" className="alert-link" rel="noopener noreferrer" target="_blank">developer.mapquest.com</a> and set the MAPQUEST_API_KEY variable to your key.
                                 <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>                                        
