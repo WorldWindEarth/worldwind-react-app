@@ -1,6 +1,6 @@
 <img src="https://avatars2.githubusercontent.com/u/19747367?s=400&u=0a2ab5cfd1a88c8e09d212134c331a2604c331a5&v=4" height="100"/> 
 
-# [Worldwind React](https://emxsys.github.io/worldwind-react-app/) (worldwind-react-app)
+# [WorldWind React](https://emxsys.github.io/worldwind-react-app/) (worldwind-react-app)
 
 [![Build Status](https://travis-ci.org/emxsys/worldwind-react-app.svg?branch=master)](https://travis-ci.org/emxsys/worldwind-react-app)
 
