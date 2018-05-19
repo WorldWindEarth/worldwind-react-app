@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 import WorldWind from '@nasaworldwind/worldwind';
 import PropTypes from 'prop-types';
 
-import Modal from '../Modal';
 import SearchPreview from './SearchPreview';
+import Map from './Map';
+import Modal from '../Modal';
 
-export default class Search extends Component {
+export default class Search extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -21,6 +21,11 @@ export default class Search extends Component {
         this.handleHideModal = this.handleHideModal.bind(this);
         this.handleGotoResult = this.handleGotoResult.bind(this);
     }
+    
+    static propTypes = {
+        map: PropTypes.instanceOf(Map),
+        mapQuestApiKey: PropTypes.string
+    }  
     
     handleChange(event) {
         this.setState({value: event.target.value});
