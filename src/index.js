@@ -5,7 +5,8 @@ import WorldWind from '@nasaworldwind/worldwind';
 
 import {WorldWindFixes} from './api/globe/WorldWindFixes';
 import App from './App';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
 // Apply fixes to the WorldWind library
