@@ -1,7 +1,25 @@
 <img src="https://avatars2.githubusercontent.com/u/19747367?s=400&u=0a2ab5cfd1a88c8e09d212134c331a2604c331a5&v=4" height="100"/> 
+
 # WorldWind React App (worldwind-react-app)
 
 [![Build Status](https://travis-ci.org/emxsys/worldwind-react-app.svg?branch=master)](https://travis-ci.org/emxsys/worldwind-react-app)
+
+This project lets you quickly build a geo-browser web app using the 
+[NASA WorldWind](https://worldwind.arc.nasa.gov/web) library with [React](https://reactjs.org) 
+and [Bootstrap](https://getbootstrap.com). It provides a feature-rich, responsive, customizable 
+web app ready to be deployed to your site. 
+
+This project includes:
+
+- Initializing WorldWind with 3D globes and/or 2D maps
+- Configuring and managing layers and settings
+- Place name searches and geocoding
+- Creating placemarks
+- Going to locations
+- Multi-globe support
+- Plus, automatic deployment to [GitHub pages](https://pages.github.com/) using [Travis-CI](https://travis-ci.org/)
+
+Checkout the project running in GitHub pages: [Worldwind React](https://emxsys.github.io/worldwind-react-app/)
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
