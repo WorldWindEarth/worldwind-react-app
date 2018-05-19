@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 import './Markers.css';
 
 class Markers extends Component {
+    
+    addMarker(placemark) {
+        console.log("addMarker: " + placemark.label);
+    }
     render() {
         return (
             <div className="card globe-card">
