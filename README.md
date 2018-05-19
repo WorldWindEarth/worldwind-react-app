@@ -17,9 +17,9 @@ This project includes:
 - Creating placemarks
 - Going to locations
 - Multi-globe support
-- Plus, automatic deployment to [GitHub pages](https://pages.github.com/) using [Travis-CI](https://travis-ci.org/)
+- Plus, automatic deployment to [GitHub Pages](https://emxsys.github.io/worldwind-react-app/) using 
+[Travis-CI](https://travis-ci.org/emxsys/worldwind-react-app)
 
-Checkout the project running in GitHub pages: [Worldwind React](https://emxsys.github.io/worldwind-react-app/)
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
