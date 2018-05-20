@@ -14,7 +14,7 @@ class NavBar extends Component {
                 <li className="nav-item">
                     <a className="nav-link" data-toggle="collapse" href={props.href} role="button">
                         <span className={props.icon} aria-hidden="true"></span>
-                        <span className="d-md-none d-lg-inline" aria-hidden="true">{props.title}</span>
+                        <span className="d-md-none d-lg-inline pl-1" aria-hidden="true">{props.title}</span>
                     </a>
                 </li>
             );
