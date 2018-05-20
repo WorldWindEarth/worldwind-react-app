@@ -3,7 +3,7 @@ import WorldWind from '@nasaworldwind/worldwind';
 import PropTypes from 'prop-types';
 
 import SearchPreview from './SearchPreview';
-import Map from './Map';
+import Globe from './Globe';
 import Modal from '../Modal';
 
 export default class Search extends React.Component {
@@ -23,7 +23,7 @@ export default class Search extends React.Component {
     }
     
     static propTypes = {
-        map: PropTypes.instanceOf(Map),
+        globe: PropTypes.instanceOf(Globe),
         mapQuestApiKey: PropTypes.string
     }  
     
@@ -50,12 +50,12 @@ export default class Search extends React.Component {
     handleGotoResult(result) {
         const latitude = parseFloat(result.lat);
         const longitude = parseFloat(result.lon);
-        // Update the map 
-        this.props.map.goTo(latitude, longitude);
+        // Update the globe 
+        this.props.globe.goTo(latitude, longitude);
     }
     
     performSearch () {
-        const globe = this.props.map.globe;
+        const globe = this.props.globe;
         
         if (!this.props.mapQuestApiKey) {
             console.error("SearchViewModel: A MapQuest API key is required to use the geocoder in production. Get your API key at https://developer.mapquest.com/");
@@ -88,7 +88,7 @@ export default class Search extends React.Component {
         let modal = this.state.results.length > 0 ?                  
             <Modal>
                 <SearchPreview 
-                    map={this.props.map}
+                    globe={this.props.globe}
                     results={this.state.results}
                     handleHideModal={this.handleHideModal}
                     handleGotoSelection={this.handleGotoResult}

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import WorldWind from '@nasaworldwind/worldwind';
 import PropTypes from 'prop-types';
 
-import Map from './Map';
+import Globe from './Globe';
 import './Layers.css';
 
 /**
@@ -18,11 +18,11 @@ export default class LayerButton extends Component {
     
     static propTypes = {
         layer: PropTypes.instanceOf(WorldWind.Layer).isRequired,
-        map: PropTypes.instanceOf(Map).isRequired
+        globe: PropTypes.instanceOf(Globe).isRequired
     }   
 
     onClickHandler(e) {
-        this.props.map.toggleLayer(this.props.layer);
+        this.props.globe.toggleLayer(this.props.layer);
     }
 
     render() {

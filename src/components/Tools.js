@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import WorldWind from '@nasaworldwind/worldwind';
 import PropTypes from 'prop-types';
 
-import Map from './Map';
+import Globe from './Globe';
 import Markers from './Markers';
 import './Tools.css';
 
@@ -20,7 +20,7 @@ export default class Tools extends Component {
         
 
     static propTypes = {
-        map: PropTypes.instanceOf(Map),
+        globe: PropTypes.instanceOf(Globe),
         markers: PropTypes.instanceOf(Markers),
         markersLayerName: PropTypes.string
     }   
@@ -42,7 +42,7 @@ export default class Tools extends Component {
     }
         
     armDropMarker() {
-        this.props.map.activateClickDrop(this.dropMarkerCallback);
+        this.props.globe.activateClickDrop(this.dropMarkerCallback);
     };        
 
     dropMarkerCallback(position) {
@@ -67,7 +67,7 @@ export default class Tools extends Component {
         placemark.eyeDistanceScalingThreshold = 2500000;
 
         // Add the placemark to the layer and to the Markers component
-        const globe = this.props.map.globe;
+        const globe = this.props.globe;
         const layer = globe.findLayerByName(this.props.markersLayerName);
         if (layer) {
             layer.addRenderable(placemark);
@@ -79,7 +79,7 @@ export default class Tools extends Component {
        
     render() {
         // Wait for the globe to be intialized before rendering this component
-        if (!this.props.map) {
+        if (!this.props.globe) {
             return null;
         }
         

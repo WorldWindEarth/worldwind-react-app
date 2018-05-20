@@ -1,9 +1,16 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import 'bootstrap';
 
-import Search from './Search'
+import Globe from './Globe';
+import Search from './Search';
 
 class NavBar extends Component {
+
+    static propTypes = {
+        globe: PropTypes.instanceOf(Globe)
+    }   
+ 
     /**
      * Renders a BootStrap NavBar with branding, buttons and a search box.
      * @returns {String}
@@ -34,7 +41,7 @@ class NavBar extends Component {
                         <NavItem title="Markers" icon="fas fa-map-marker-alt" href="#markers"/>
                         <NavItem title="Settings" icon="fas fa-cog" href="#settings"/>
                     </ul>
-                    <Search map={this.props.map}/>
+                    <Search globe={this.props.globe}/>
                 </div>
             </nav>
         );
