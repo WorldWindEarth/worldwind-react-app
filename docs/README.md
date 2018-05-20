@@ -1,4 +1,4 @@
-![Emxsys](public/images/emxsys_logo.png)
+![Emxsys](images/emxsys_logo.png)
 
 # [WorldWind React](https://emxsys.github.io/worldwind-react-app/) (worldwind-react-app)
 
