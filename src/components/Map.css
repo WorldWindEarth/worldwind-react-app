@@ -3,3 +3,11 @@
     height: 100%;
     background-color: rgb(36,74,101);
 }
+
+.cursor-crosshair {
+    cursor: crosshair;
+}
+
+.cursor-default {
+    cursor: default;
+}

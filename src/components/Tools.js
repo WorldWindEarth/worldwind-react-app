@@ -14,6 +14,8 @@ export default class Tools extends Component {
         };        
         this.isDropArmed = false;
         this.dropCallback =  null;
+        
+        this.dropMarkerCallback = this.dropMarkerCallback.bind(this);
     }        
         
 
@@ -24,19 +26,23 @@ export default class Tools extends Component {
     }   
     
     static pushpins = [
-            "https://files.worldwind.arc.nasa.gov/artifactory/web/0.9.0/images/pushpins/castshadow-red.png",
-            "https://files.worldwind.arc.nasa.gov/artifactory/web/0.9.0/images/pushpins/castshadow-green.png",
-            "https://files.worldwind.arc.nasa.gov/artifactory/web/0.9.0/images/pushpins/castshadow-blue.png",
-            "https://files.worldwind.arc.nasa.gov/artifactory/web/0.9.0/images/pushpins/castshadow-orange.png",
-            "https://files.worldwind.arc.nasa.gov/artifactory/web/0.9.0/images/pushpins/castshadow-teal.png",
-            "https://files.worldwind.arc.nasa.gov/artifactory/web/0.9.0/images/pushpins/castshadow-purple.png",
-            "https://files.worldwind.arc.nasa.gov/artifactory/web/0.9.0/images/pushpins/castshadow-white.png",
-            "https://files.worldwind.arc.nasa.gov/artifactory/web/0.9.0/images/pushpins/castshadow-black.png"
-        ];
+        "https://files.worldwind.arc.nasa.gov/artifactory/web/0.9.0/images/pushpins/castshadow-red.png",
+        "https://files.worldwind.arc.nasa.gov/artifactory/web/0.9.0/images/pushpins/castshadow-green.png",
+        "https://files.worldwind.arc.nasa.gov/artifactory/web/0.9.0/images/pushpins/castshadow-blue.png",
+        "https://files.worldwind.arc.nasa.gov/artifactory/web/0.9.0/images/pushpins/castshadow-orange.png",
+        "https://files.worldwind.arc.nasa.gov/artifactory/web/0.9.0/images/pushpins/castshadow-teal.png",
+        "https://files.worldwind.arc.nasa.gov/artifactory/web/0.9.0/images/pushpins/castshadow-purple.png",
+        "https://files.worldwind.arc.nasa.gov/artifactory/web/0.9.0/images/pushpins/castshadow-white.png",
+        "https://files.worldwind.arc.nasa.gov/artifactory/web/0.9.0/images/pushpins/castshadow-black.png"
+    ];
+    
+    selectPushpin(pushpin) {
+        this.setState({ selectedMarkerImage: pushpin });
+        this.armDropMarker();
+    }
         
     armDropMarker() {
-        this.isDropArmed = true;
-        this.dropCallback = this.dropMarkerCallback;
+        this.props.map.activateClickDrop(this.dropMarkerCallback);
     };        
 
     dropMarkerCallback(position) {
@@ -70,58 +76,7 @@ export default class Tools extends Component {
             console.warn("Renderable layer for markers not found: "+ this.props.markersLayerName);
         }
     };
-    
-   /**
-    * Handles a click on the WorldWindow. If a "drop" action callback has been
-    * defined, it invokes the function with the picked location.
-    * @param {Object} event
-    */
-    handleGlobeClick(event) {
-            
-        console.log("click");
-        if (!this.isDropArmed) {
-            return;
-        }
-        console.log("drop");
-        // Get the clicked window coords
-        let type = event.type, x, y;
-        switch (type) {
-            case 'click':
-                x = event.clientX;
-                y = event.clientY;
-                break;
-            case 'touchend':
-                if (!event.changedTouches[0]) {
-                    return;
-                }
-                x = event.changedTouches[0].clientX;
-                y = event.changedTouches[0].clientY;
-                break;
-            default:
-        }
-        if (this.dropCallback) {
-            const globe = this.props.map.globe;
-            // Get all the picked items 
-            const pickList = globe.wwd.pickTerrain(globe.wwd.canvasCoordinates(x, y));
-            // Terrain should be one of the items if the globe was clicked
-            const terrain = pickList.terrainObject();
-            if (terrain) {
-                this.dropCallback(terrain.position);
-            }
-        }
-        this.isDropArmed = false;
-        event.stopImmediatePropagation();
-    };
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.map && this.props.map !== prevProps.map) {            
-            let globe = this.props.map.globe;
-            // Assign a click event handlers to the WorldWindow for Click/Drop support
-            globe.wwd.addEventListener('click', (e)=>this.handleGlobeClick(e));
-            globe.wwd.addEventListener('touchend', (e)=>this.handleGlobeClick(e));  
-        }
-    }
-        
+       
     render() {
         // Wait for the globe to be intialized before rendering this component
         if (!this.props.map) {
@@ -130,7 +85,7 @@ export default class Tools extends Component {
         
         // Create a tool palette with dropdowns
         const listItems = Tools.pushpins.map((pushpin) => 
-            <li key={pushpin} onClick={()=>this.setState({ selectedMarkerImage: pushpin })}>
+            <li key={pushpin} onClick={()=> this.selectPushpin(pushpin)}>
                 <a><img className="tool-image" src={pushpin} alt="Selected Marker"/></a> 
             </li>
         );
