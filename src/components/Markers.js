@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import WorldWind from '@nasaworldwind/worldwind';
 import PropTypes from 'prop-types';
 
 import Globe from './Globe';
