@@ -2,12 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import WorldWind from '@nasaworldwind/worldwind';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
 
 import {WorldWindFixes} from './api/globe/WorldWindFixes';
 import App from './App';
-
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './index.css';
 
 // Apply fixes to the WorldWind library
 WorldWindFixes.applyLibraryFixes();
