@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import WorldWind from '@nasaworldwind/worldwind';
 import PropTypes from 'prop-types';
 
-import Map from './Map';
+import Globe from './Globe';
 import './Markers.css';
 
 class Markers extends Component {
@@ -13,7 +13,7 @@ class Markers extends Component {
     }
     
     static propTypes = {
-        map: PropTypes.instanceOf(Map),
+        globe: PropTypes.instanceOf(Globe),
         markersLayerName: PropTypes.string.isRequired
     }   
             
@@ -23,7 +23,7 @@ class Markers extends Component {
     }
     
     gotoMarker(marker) {
-        this.props.map.globe.wwd.goTo(new WorldWind.Location(marker.position.latitude, marker.position.longitude));
+        this.props.globe.goTo(marker.position.latitude, marker.position.longitude);
     }
     
     editMarker(marker) {
@@ -32,9 +32,9 @@ class Markers extends Component {
     
     removeMarker(marker) {
         // Find and remove the marker from the layer and the state array
-        const map = this.props.map; 
+        const globe = this.props.globe; 
         const layerName = this.props.markersLayerName;
-        const markerLayer = map.globe.findLayerByName(layerName);
+        const markerLayer = globe.findLayerByName(layerName);
         for (let i = 0, max = this.state.markers.length; i < max; i++) {
             let placemark = markerLayer.renderables[i];
             if (placemark === marker) {
@@ -47,7 +47,7 @@ class Markers extends Component {
      }
     
     render() {
-        if (!this.props.map) {
+        if (!this.props.globe) {
             return null;
         }
         const self = this;
@@ -87,7 +87,7 @@ class Markers extends Component {
             <div className="card globe-card">
                 <div className="card-header">
                     <h5 className="card-title">
-                        <span className="fas fa-map-marker-alt" aria-hidden="true"></span> Markers
+                        <span className="fas fa-globe-marker-alt" aria-hidden="true"></span> Markers
                         <button type="button" className="close pull-right" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button></h5>

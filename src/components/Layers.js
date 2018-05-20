@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-import Map from './Map'
+import Globe from './Globe';
 import LayerList from './LayerList';
 import './Layers.css';
 
@@ -10,7 +10,7 @@ export default class Layers extends Component {
     static propTypes = {
         baseLayers: PropTypes.object.isRequired,
         overlayLayers: PropTypes.object.isRequired,
-        map: PropTypes.instanceOf(Map)
+        globe: PropTypes.instanceOf(Globe)
     }   
 
     render() {
@@ -26,9 +26,9 @@ export default class Layers extends Component {
                     </h5>
                 </div>
                 <div className="card-body">
-                    <LayerList layers={this.props.overlayLayers.layers} map={this.props.map}/>
+                    <LayerList layers={this.props.overlayLayers.layers} globe={this.props.globe}/>
                     <hr/>
-                    <LayerList layers={this.props.baseLayers.layers} map={this.props.map}/>
+                    <LayerList layers={this.props.baseLayers.layers} globe={this.props.globe}/>
                 </div>
             </div>
         );

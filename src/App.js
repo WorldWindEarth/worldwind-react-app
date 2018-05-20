@@ -8,7 +8,7 @@ import EoxSentinal2CloudlessLayer from './api/globe/EoxSentinal2CloudlessLayer';
 import EoxSentinal2WithLabelsLayer from './api/globe/EoxSentinal2WithLabelsLayer';
 
 import NavBar from './components/NavBar';
-import Map from './components/Map';
+import Globe from './components/Globe';
 import Tools from './components/Tools';
 import Layers from './components/Layers';
 import Markers from './components/Markers';
@@ -26,9 +26,9 @@ const App = observer(class App extends Component {
             debugLayers: {layers: [], lastUpdated: Date.now()}
         };
         // Holds a reference to the Map component after mounting
-        this.mapRef = React.createRef();
+        this.globeRef = React.createRef();
         this.markersRef = React.createRef();
-        this.map = null;
+        this.globe = null;
     }
     
     /**
@@ -43,7 +43,7 @@ const App = observer(class App extends Component {
     
     componentDidMount() {
         // Get the component with the WorldWindow after mounting
-        this.map = this.mapRef.current;
+        this.globe = this.globeRef.current;
         
         // Define the layers to be added to the globe.
         const layerConfig = [
@@ -64,22 +64,22 @@ const App = observer(class App extends Component {
             {layer: new EoxOpenStreetMapLayer(),
                 options: {category: "overlay", enabled: false, opacity: 0.8}},
             {layer: new WorldWind.RenderableLayer("Markers"),
-                options: {category: "overlay", enabled: true}},
+                options: {category: "data", enabled: true}},
             {layer: new WorldWind.CompassLayer(),
                 options: {category: "setting", enabled: false}},
-            {layer: new WorldWind.CoordinatesDisplayLayer(this.map.globe.wwd),
+            {layer: new WorldWind.CoordinatesDisplayLayer(this.globe.wwd),
                 options: {category: "setting", enabled: true}},
-            {layer: new WorldWind.ViewControlsLayer(this.map.globe.wwd),
+            {layer: new WorldWind.ViewControlsLayer(this.globe.wwd),
                 options: {category: "setting", enabled: true}},
             {layer: new WorldWind.StarFieldLayer(),
-                options: {category: "setting", enabled: false}},
+                options: {category: "setting", enabled: false, displayName: "Stars"}},
             {layer: new EnhancedAtmosphereLayer(),
                 options: {category: "setting", enabled: false}},
             {layer: new WorldWind.ShowTessellationLayer(),
                 options: {category: "debug", enabled: false}}
         ];
         // Add the layers to the globe
-        layerConfig.forEach(config => this.map.addLayer(config.layer, config.options));
+        layerConfig.forEach(config => this.globe.addLayer(config.layer, config.options));
     }
     /**
      * Renders the globe and the panels that render the globe's contents.
@@ -89,17 +89,17 @@ const App = observer(class App extends Component {
     render() {
         return (
             <div>
-                <NavBar map={this.map}/>
+                <NavBar globe={this.globe}/>
                 <div className="App container-fluid p-0">
                     <div className="globe">
-                        <Map 
+                        <Globe 
                             id="primary-globe" 
-                            ref={this.mapRef} 
+                            ref={this.globeRef} 
                             onUpdate={this.onUpdate.bind(this)} />
                     </div>
                     <div className="globe-overlay noninteractive">
                         <Tools 
-                            map={this.mapRef.current} 
+                            globe={this.globeRef.current} 
                             markers={this.markersRef.current}
                             markersLayerName="Markers"/>
                     </div>
@@ -109,19 +109,19 @@ const App = observer(class App extends Component {
                                 <Layers
                                     baseLayers={this.state.baseLayers} 
                                     overlayLayers={this.state.overlayLayers} 
-                                    map={this.map} />
+                                    globe={this.globe} />
                             </div>
                             <div id="markers" className="collapse interactive">
                                 <Markers 
                                     ref={this.markersRef}
-                                    map={this.mapRef.current}
+                                    globe={this.globeRef.current}
                                     markersLayerName="Markers" />
                             </div>
                             <div id="settings" className="collapse interactive">
                                 <Settings
                                     settingLayers={this.state.settingLayers} 
                                     debugLayers={this.state.debugLayers} 
-                                    map={this.map} />
+                                    globe={this.globe} />
                             </div>
                         </div>
                     </div>

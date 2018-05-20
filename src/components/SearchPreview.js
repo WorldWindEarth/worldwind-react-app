@@ -5,22 +5,22 @@ import WorldWind from '@nasaworldwind/worldwind';
 import $ from 'jquery';
 import 'bootstrap';
 
-import Map from './Map';
+import Globe from './Globe';
 import './SearchPreview.css';
 
 class SearchPreview  extends Component{
     constructor(props) {
         super(props);
-        this.map = null;
+        this.globe = null;
         this.state = {selection: this.props.results[0]};
-        this.mapRef = React.createRef();
+        this.globeRef = React.createRef();
 
         this.handleGotoClick = this.handleGotoClick.bind(this);
         this.handlePreviewClick = this.handlePreviewClick.bind(this);
     }
     
     static propTypes = {
-        map: PropTypes.instanceOf(Map),
+        globe: PropTypes.instanceOf(Globe),
         results: PropTypes.array,
         handleHideModal: PropTypes.func,
         handleGotoSelection: PropTypes.func,
@@ -33,7 +33,7 @@ class SearchPreview  extends Component{
         
         let latitude = parseFloat(result.lat),
             longitude = parseFloat(result.lon);
-        this.map.goTo(latitude, longitude); 
+        this.globe.goTo(latitude, longitude); 
     }
     
     handleGotoClick() {
@@ -43,8 +43,8 @@ class SearchPreview  extends Component{
     
     
     componentDidMount(){
-        this.map = this.mapRef.current;
-        this.map.addLayer(new WorldWind.BingRoadsLayer(), { detailControl: 1.25 });
+        this.globe = this.globeRef.current;
+        this.globe.addLayer(new WorldWind.BingRoadsLayer(), { detailControl: 1.25 });
         
         // Create pushpin placemarks to represent the results on the globe
         let resultsLayer = new WorldWind.RenderableLayer();
@@ -65,7 +65,7 @@ class SearchPreview  extends Component{
             placemark.attributes = placemarkAttributes;
             resultsLayer.addRenderable(placemark); 
         });    
-        this.map.addLayer(resultsLayer);
+        this.globe.addLayer(resultsLayer);
         
         // Show this dialog when mounted and call the prop function when closed
         const element = ReactDOM.findDOMNode(this);
@@ -101,11 +101,11 @@ class SearchPreview  extends Component{
                     </div>
                     <div className="modal-body" >
                         <div className="preview-globe">
-                            <Map id="preview-globe" ref={this.mapRef}/>
+                            <Globe id="preview-globe" projection="Mercator" ref={this.globeRef}/>
                         </div>
                         <div className="modal-body-table">
                             <div className="alert alert-warning alert-dismissible fade show" role="alert" data-bind="visible: showApiWarning">
-                                MapQuest API key missing. Get a free key at <a href="https://developer.mapquest.com/" className="alert-link" rel="noopener noreferrer" target="_blank">developer.mapquest.com</a> and set the MAPQUEST_API_KEY variable to your key.
+                                MapQuest API key missing. Get a free key at <a href="https://developer.globequest.com/" className="alert-link" rel="noopener noreferrer" target="_blank">developer.globequest.com</a> and set the MAPQUEST_API_KEY variable to your key.
                                 <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>                                        
