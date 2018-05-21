@@ -12,11 +12,14 @@ const NETWORK_RETRIEVAL_QUEUE_SIZE = 8;
 const MEMORY_CACHE_VOLATILE_BIAS = 60e3;   // in milliseconds
 
 class WorldWindFixes {
-
+    static isLibraryFixed = false;
     /**
      * Apply fixes to the WorldWind library's class prototypes.
      */
     static applyLibraryFixes() {
+        if (WorldWindFixes.isLibraryFixed) {
+            return;
+        }
         // Augment the 0.9.0 version WorldWind with bug fixes and customizations
         if (WorldWind.VERSION === "0.9.0") {
 
@@ -476,6 +479,8 @@ class WorldWindFixes {
             };
 
         } // end if 0.9.0
+        
+        WorldWindFixes.isLibraryFixed = true;
     }
 
     /**
