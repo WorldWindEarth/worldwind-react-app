@@ -1,9 +1,10 @@
 import React from 'react';
 import WorldWind from '@nasaworldwind/worldwind';
 import PropTypes from 'prop-types';
+import Globe from 'worldwind-react-globe';
 
 import SearchPreview from './SearchPreview';
-import Globe from './Globe';
+//import Globe from './Globe';
 import Modal from '../Modal';
 
 export default class Search extends React.Component {

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import WorldWind from '@nasaworldwind/worldwind';
 import PropTypes from 'prop-types';
-
-import Globe from './Globe';
+import Globe from 'worldwind-react-globe';
+//import Globe from './Globe';
 import './Layers.css';
 
 /**

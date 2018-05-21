@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { observer } from "mobx-react";
 import WorldWind from '@nasaworldwind/worldwind';
+import Globe from 'worldwind-react-globe';
 
 import EnhancedAtmosphereLayer from './api/globe/EnhancedAtmosphereLayer';
 import EoxOpenStreetMapLayer from './api/globe/EoxOpenStreetMapLayer';
@@ -8,7 +9,7 @@ import EoxSentinal2CloudlessLayer from './api/globe/EoxSentinal2CloudlessLayer';
 import EoxSentinal2WithLabelsLayer from './api/globe/EoxSentinal2WithLabelsLayer';
 
 import NavBar from './components/NavBar';
-import Globe from './components/Globe';
+//import Globe from './components/Globe';
 import Tools from './components/Tools';
 import Layers from './components/Layers';
 import Markers from './components/Markers';
