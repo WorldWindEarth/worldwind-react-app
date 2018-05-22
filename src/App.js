@@ -94,7 +94,6 @@ const App = observer(class App extends Component {
                 <div className="App container-fluid p-0">
                     <div className="globe">
                         <Globe 
-                            id="primary-globe" 
                             ref={this.globeRef} 
                             onUpdate={this.onUpdate.bind(this)} />
                     </div>
