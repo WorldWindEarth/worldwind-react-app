@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import Globe from 'worldwind-react-globe';
 import 'bootstrap';
 
-import Globe from './Globe';
+//import Globe from './Globe';
 import Search from './Search';
 
 class NavBar extends Component {
