@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Globe from 'worldwind-react-globe';
-//import Globe from './Globe';
+
 import LayerList from './LayerList';
 import './Layers.css';
 

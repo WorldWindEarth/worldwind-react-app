@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import WorldWind from '@nasaworldwind/worldwind';
 import PropTypes from 'prop-types';
 import Globe from 'worldwind-react-globe';
 
-//import Globe from './Globe';
 import Markers from './Markers';
 import './Tools.css';
+
+/* global WorldWind */
 
 export default class Tools extends Component {
     constructor(props) {
@@ -19,7 +19,6 @@ export default class Tools extends Component {
         this.dropMarkerCallback = this.dropMarkerCallback.bind(this);
     }        
         
-
     static propTypes = {
         globe: PropTypes.instanceOf(Globe),
         markers: PropTypes.instanceOf(Markers),
@@ -69,7 +68,7 @@ export default class Tools extends Component {
 
         // Add the placemark to the layer and to the Markers component
         const globe = this.props.globe;
-        const layer = globe.findLayerByName(this.props.markersLayerName);
+        const layer = globe.getLayer(this.props.markersLayerName);
         if (layer) {
             layer.addRenderable(placemark);
             this.props.markers.addMarker(placemark);

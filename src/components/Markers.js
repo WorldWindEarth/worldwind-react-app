@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Globe from 'worldwind-react-globe';
-//import Globe from './Globe';
+
 import './Markers.css';
 
 class Markers extends Component {
@@ -15,11 +15,18 @@ class Markers extends Component {
         globe: PropTypes.instanceOf(Globe),
         markersLayerName: PropTypes.string.isRequired
     }   
-            
+  
+    static nextMarkerId = 1;
+  
     addMarker(marker) {
+        // Ensure each marker has a unique ID
+        if (!marker.uniqueId) {
+          marker.uniqueId = Markers.nextMarkerId++;
+        }
         // Create a new array from the previous array + marker
         this.setState(prevState => ({ markers: [...prevState.markers, marker]}));
     }
+    
     
     gotoMarker(marker) {
         this.props.globe.goTo(marker.position.latitude, marker.position.longitude);
@@ -33,7 +40,7 @@ class Markers extends Component {
         // Find and remove the marker from the layer and the state array
         const globe = this.props.globe; 
         const layerName = this.props.markersLayerName;
-        const markerLayer = globe.findLayerByName(layerName);
+        const markerLayer = globe.getLayer(layerName);
         for (let i = 0, max = this.state.markers.length; i < max; i++) {
             let placemark = markerLayer.renderables[i];
             if (placemark === marker) {
@@ -80,7 +87,7 @@ class Markers extends Component {
             );
         }
         const markerList = this.state.markers.map((marker) =>
-            <MarkerItem marker={marker}/>
+            <MarkerItem key={marker.uniqueId} marker={marker}/>
         );    
         return (
             <div className="card globe-card">
