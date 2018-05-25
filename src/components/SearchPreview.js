@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import WorldWind from '@nasaworldwind/worldwind';
+import Globe from 'worldwind-react-globe';
 import $ from 'jquery';
 import 'bootstrap';
 
-import Globe from './Globe';
 import './SearchPreview.css';
+
+/* global WorldWind */
 
 class SearchPreview  extends Component{
     constructor(props) {

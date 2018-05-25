@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import WorldWind from '@nasaworldwind/worldwind';
 import PropTypes from 'prop-types';
 import Globe from 'worldwind-react-globe';
-//import Globe from './Globe';
+
 import './Layers.css';
+
+/* global WorldWind */
 
 /**
  * Renders a button for toggling the enabled state of a WorldWind.Layer.

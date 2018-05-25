@@ -1,21 +1,20 @@
 {
   "name": "worldwind-react-app",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "homepage": "https://emxsys.github.io/worldwind-react-app",
   "dependencies": {
-    "@nasaworldwind/worldwind": "^0.9.0",
     "ajv": "^6.5.0",
     "bootstrap": "^4.1.1",
     "jquery": "^3.3.1",
-    "mobx": "^4.2.1",
+    "mobx": "^4.3.0",
     "mobx-react": "^5.1.2",
     "popper.js": "^1.14.3",
     "prop-types": "^15.5.7",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
     "react-scripts": "^1.1.4",
-    "worldwind-react-globe": "^0.3.0"
+    "worldwind-react-globe": "^0.4.0"
   },
   "devDependencies": {
     "gh-pages": "^1.1.0"
