@@ -21,6 +21,10 @@ const App = observer(class App extends Component {
       settingLayers: {layers: [], lastUpdated: Date.now()},
       debugLayers: {layers: [], lastUpdated: Date.now()}
     };
+    
+    // Set the location of the WorldWind "images" folder to the root of the public folder
+    Globe.setBaseUrl("/");
+    
     // Holds a reference to the Map component after mounting
     this.globeRef = React.createRef();
     this.markersRef = React.createRef();
