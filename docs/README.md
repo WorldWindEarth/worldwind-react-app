@@ -10,8 +10,8 @@ __worldwind-react-app__ lets you quickly build a 3D globe geo-browser web applic
 Web WorldWind is an open-source virtual globe SDK developed jointly by 
 [NASA and ESA](https://worldwind.arc.nasa.gov/web/). 
 
-This provides a feature-rich, responsive, customizable web app ready to be deployed to your site, 
-including: 
+This project provides a feature-rich, responsive, customizable web app ready to be deployed to your 
+site, including: 
 
 - Initializing WorldWind with 3D globes and/or 2D maps
 - Configuring and managing layers and settings
