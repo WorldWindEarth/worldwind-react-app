@@ -42,7 +42,7 @@ export default class Tools extends Component {
     }
         
     armDropMarker() {
-        this.props.globe.activateClickDrop(this.dropMarkerCallback);
+        this.props.globe.armClickDrop(this.dropMarkerCallback);
     };        
 
     dropMarkerCallback(position) {

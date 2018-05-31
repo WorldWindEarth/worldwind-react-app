@@ -14,7 +14,7 @@
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-scripts": "^1.1.4",
-    "worldwind-react-globe": "^0.4.0"
+    "worldwind-react-globe": "^0.5.0"
   },
   "devDependencies": {
     "gh-pages": "^1.1.0"

@@ -23,7 +23,7 @@ const App = observer(class App extends Component {
     };
     
     // Set the location of the WorldWind "images" folder to the root of the public folder
-    Globe.setBaseUrl("/");
+    Globe.setBaseUrl("./");
     
     // Holds a reference to the Map component after mounting
     this.globeRef = React.createRef();
@@ -59,9 +59,9 @@ const App = observer(class App extends Component {
         options: {category: "base", enabled: false}},
       {layer: "Bing Aerial with Labels",
         options: {category: "base", enabled: false}},
-      {layer: "Sentinal2",
+      {layer: "Sentinal-2",
         options: {category: "base", enabled: false}},
-      {layer: "Sentinal2 with Labels",
+      {layer: "Sentinal-2 with Labels",
         options: {category: "base", enabled: false}},
       {layer: "Bing Roads",
         options: {category: "overlay", enabled: false, opacity: 0.8}},
