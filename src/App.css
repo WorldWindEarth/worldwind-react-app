@@ -1,14 +1,33 @@
+
+body {
+  /*Account for the navbar*/
+  padding-top: 3.5rem;
+}
+
 .globe {
     width: 100%;
     height: calc(100vh - 3.5rem);
     background-color: black;
 }
 
-.globe-overlay {
+.overlayTools {
     position: absolute;
     top: 3.5rem;
+    max-height: calc(100vh - 3.5rem);
 }
 
-.globe-card {
+.overlayCards {
+    position: absolute;
+    top: 3.5rem;
+    left: 100px;
+    max-height: calc(100vh - 3.5rem);
+}
+
+.card {
     background:rgba(255,255,255,0.7) !important;
+}
+
+.card-body {
+    overflow-y: scroll;
+    max-height: calc(100vh - 8rem);
 }
