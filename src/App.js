@@ -7,7 +7,6 @@ import React, { Component } from 'react'
 import Globe from 'worldwind-react-globe'
 import { 
   CardColumns, 
-  Collapse, 
   Container } from 'reactstrap'
 import { 
   LayersCard, 
@@ -30,6 +29,9 @@ export default class App extends Component {
       alt: 10e6,
       globe: null
     }
+    // Set the location of the WorldWind "images" folder to the root of the public folder
+    Globe.setBaseUrl("./");    
+    
     this.globeRef = React.createRef()
     this.layersRef = React.createRef()
     this.markersRef = React.createRef()
