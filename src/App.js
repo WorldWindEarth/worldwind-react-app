@@ -39,7 +39,7 @@ export default class App extends Component {
   }
   
   componentDidMount() {
-    // Get the component with the WorldWindow after mounting
+    // Important! Trigger a state change after the globe is mounted
     this.setState({globe: this.globeRef.current})
   }
   
@@ -76,7 +76,7 @@ export default class App extends Component {
       <div>
         <NavBar 
             logo=''
-            title='WorldWind React'
+            title='WorldWind React Demo'
             href='https://github.com/emxsys/worldwind-react-app'
             items={navbarItems}
             search={navbarSearch} />
