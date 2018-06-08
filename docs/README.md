@@ -20,7 +20,11 @@ site, including:
 - Going to locations
 - Multi-globe support
 - Plus, automatic deployment to GitHub Pages (example: [emxsys/github.io/worldwind-react-app](https://emxsys.github.io/worldwind-react-app/))
- using npm or via [Travis-CI](https://travis-ci.org/emxsys/worldwind-react-app)
+ using npm or via [Travis-CI](https://travis-ci.org/emxsys/worldwind-react-app).
+
+The __worldwind-react-app__ project uses the [worldwind-react-globe](https://github.com/emxsys/worldwind-react-globe)
+component to create the WorldWind globe, and [worldwind-react-globe-bs4](https://github.com/emxsys/worldwind-react-globe-bs4) 
+for the Bootstrap 4 UI.
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
