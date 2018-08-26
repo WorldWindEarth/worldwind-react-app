@@ -4,23 +4,23 @@
   "private": true,
   "homepage": "https://emxsys.github.io/worldwind-react-app",
   "dependencies": {
-    "ajv": "^6.5.0",
-    "bootstrap": "^4.1.1",
+    "ajv": "^6.5.3",
+    "bootstrap": "^4.1.3",
     "jquery": "^3.3.1",
-    "mobx": "^4.3.0",
-    "mobx-react": "^5.1.2",
-    "popper.js": "^1.14.3",
-    "prop-types": "^15.5.7",
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0",
+    "mobx": "^4.3.2",
+    "mobx-react": "^5.2.5",
+    "popper.js": "^1.14.4",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
     "react-fontawesome": "^1.6.1",
-    "react-scripts": "^1.1.4",
-    "reactstrap": "^6.0.1",
-    "worldwind-react-globe": "^0.6.0",
-    "worldwind-react-globe-bs4": "^0.3.3"
+    "react-scripts": "^1.1.5",
+    "reactstrap": "^6.4.0",
+    "worldwind-react-globe": "^1.1.0",
+    "worldwind-react-globe-bs4": "^1.0.3"
   },
   "devDependencies": {
-    "gh-pages": "^1.1.0"
+    "gh-pages": "^1.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
