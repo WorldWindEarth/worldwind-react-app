@@ -29,8 +29,6 @@ export default class App extends Component {
       alt: 10e6,
       globe: null
     }
-    // Set the location of the WorldWind "images" folder to the root of the public folder
-    Globe.setBaseUrl("./");    
     
     this.globeRef = React.createRef()
     this.layersRef = React.createRef()
@@ -48,7 +46,7 @@ export default class App extends Component {
     const globe = this.globeRef.current
     
     const layers = [
-      {layer: 'blue-marble', options: {category: 'base', enabled: false}},
+      {layer: 'blue-marble', options: {category: 'base', enabled: true}},
       {layer: 'blue-marble-landsat', options: {category: 'base', enabled: false}},
       {layer: 'bing-aerial', options: {category: 'base', enabled: false}},
       {layer: 'bing-aerial-labels', options: {category: 'base', enabled: false}},
