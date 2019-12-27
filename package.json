@@ -5,7 +5,7 @@
   "homepage": "https://emxsys.github.io/worldwind-react-app",
   "dependencies": {
     "ajv": "^6.5.3",
-    "bootstrap": "^4.1.3",
+    "bootstrap": "^4.3.1",
     "jquery": "^3.3.1",
     "mobx": "^4.3.2",
     "mobx-react": "^5.2.5",
